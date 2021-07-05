@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.0.0'
+gem 'oj'
 
 group :development, :test do
   gem 'pry'
