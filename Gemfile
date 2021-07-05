@@ -15,10 +15,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
+gem 'bootstrap', '~> 4.0.0'
 
 group :development, :test do
   gem 'pry'
   gem 'travis'
+  gem 'faker'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -29,6 +32,9 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner'
+  gem 'orderly'
+  gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
