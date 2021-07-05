@@ -28,4 +28,6 @@
 * [ ] Have you written new tests for your core changes, as applicable?
 * [ ] Have you successfully ran tests with your changes locally?
 
+- [ ] All Tests are Passing
+
 closes #
