@@ -26,7 +26,7 @@ RSpec.describe 'Welcome Page' do
         end
 
         expect(current_path).to eq dashboard_path
-        
+
         within '#flash-message' do
           expect(page).to have_content('Welcome back!')
         end
