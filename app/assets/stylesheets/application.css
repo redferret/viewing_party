@@ -29,3 +29,28 @@ footer {
   align-self: baseline;
   flex-direction: row;
 }
+
+hr {
+  color: black;
+  height: 1px;
+  background-color: black;
+}
+
+.nav_bar_wrapper{
+  display: flex;
+}
+
+.nav_bar_links{
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+}
+
+.welcome_banner{
+  text-align: center;
+}
+
+.discover_link{
+  text-align: center;
+}
