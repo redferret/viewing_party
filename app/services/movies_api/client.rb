@@ -24,7 +24,7 @@ module MoviesAPI
 
       return parse_json if response_successful?
 
-      raise http_error, "Status: #{response.status}, Response: #{response.body}"
+      raise HttpError, "Status: #{response.status}, Response: #{response.body}"
     end
 
     def self.parse_json

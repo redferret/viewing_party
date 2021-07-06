@@ -5,6 +5,8 @@ module ApiExceptions
 
   attr_reader :response
 
+  HttpError = Class.new(StandardError)
+
   def response_successful?
     response.status == HTTP_SUCCESS
   end
