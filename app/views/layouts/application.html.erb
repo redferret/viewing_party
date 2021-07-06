@@ -9,9 +9,22 @@
   </head>
 
   <body>
-    <main>
+    <% flash.each do |type, msg| %>
+      <div <%= flash_class(type) %> role='alert', id='flash-message'>
+        <%= msg %>
+      </div>
+    <% end %>
+    
+    <div class='row text-center'>
+      <div class='col'>
+        <h1>Welcome to Viewing Party</h1>
+      </div>
+    </div>
+
+    <div class='container'>
       <%= yield %>
-    </main>
+    </div>
+    
     <footer>
       <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="The MovieDB Logo" width="75px" style="margin:10px" >
       <div>

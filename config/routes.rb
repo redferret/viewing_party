@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/', to: 'welcome#index'
 
-   get '/', to: 'welcome#index'
-
-
-   resources :users, only: [:new]
-
-
+  scope module: :users do
+    resource :dashboard, only: :show
+    resource :register, controller: :users, only: [:new, :create]
+    resource :login, controller: :sessions, only: :create
+    resource :logout, controller: :sessions, only: :destroy
+  end
 end
