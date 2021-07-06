@@ -1,10 +1,36 @@
-<h1>Welcome to Viewing Party</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  Praesent ac mauris eu libero ultricies vehicula sed finibus felis.
-  Praesent at elementum mi, sed pharetra metus. Curabitur fermentum placerat tincidunt.
-  Suspendisse potenti. Maecenas libero diam, consequat eget massa placerat, fringilla
-  faucibus diam. Quisque posuere lorem sit amet eros commodo posuere. Maecenas volutpat, odio non
-  fringilla laoreet, tellus tortor consequat orci, commodo gravida metus metus nec odio.
-</p>
+<div class='row text-center'>
+  <div class='col'>
+    <h1>Welcome to Viewing Party</h1>
+  </div>
 
-<%= link_to "New to Viewing Party? Register Here", new_user_path, method: :get %>
+  <div class='col'>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Praesent ac mauris eu libero ultricies vehicula sed finibus felis.
+      Praesent at elementum mi, sed pharetra metus. Curabitur fermentum placerat tincidunt.
+      Suspendisse potenti. Maecenas libero diam, consequat eget massa placerat, fringilla
+      faucibus diam. Quisque posuere lorem sit amet eros commodo posuere. Maecenas volutpat, odio non
+      fringilla laoreet, tellus tortor consequat orci, commodo gravida metus metus nec odio.
+    </p>
+  </div>
+
+  <div class='col' id='login-form'>
+    <%= form_with model: User.new, url: new_register_path, local: true do |f| %>
+      
+      <div class='form-group'>
+        <%= f.label :email %>
+        <%= f.text_field :email, class:'form-control' %>
+      </div>
+
+      <div class='form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, class:'form-control' %>
+      </div>
+
+      <%= f.submit 'Login', class:'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class='col'>
+    <%= link_to "New to Viewing Party? Register Here", new_register_path, class: 'btn btn-link' %>
+  </div>
+</div>
