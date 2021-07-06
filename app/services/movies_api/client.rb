@@ -14,7 +14,8 @@ module MoviesAPI
     private
     def self.client
       @_faraday_connection ||= Faraday.new(API_ENDPOINT) do |client|
-        client.headers['Accept'] = 'application/json'
+        client.headers['Authorization'] = "Bearer #{ENV['MOVIES_API_AUTH_TOKEN']}"
+        client.headers['Content-Type'] = 'application/json;charset=utf-8'
       end
     end
 
