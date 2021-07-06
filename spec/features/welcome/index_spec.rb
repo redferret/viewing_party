@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Welcome Page' do
   before :each do
+    User.create!(email: 'test@test.com', password: 'password')
     visit '/'
   end
 
@@ -17,14 +18,18 @@ RSpec.describe 'Welcome Page' do
     end
 
     context 'login,' do
-      xit 'logs a user in' do
+      it 'logs a user in' do
         within '#login-form' do
           fill_in 'user[email]', with: 'test@test.com'
           fill_in 'user[password]', with: 'password'
-          click_link 'Login'
+          click_button 'Login'
         end
 
-        expect(page).to eq dashboard_path
+        expect(current_path).to eq dashboard_path
+        
+        within '#flash-message' do
+          expect(page).to have_content('Welcome back!')
+        end
       end
     end
   end
