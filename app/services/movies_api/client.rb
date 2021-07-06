@@ -7,7 +7,7 @@ module MoviesAPI
     extend ApiExceptions
     extend ApiCalls
 
-    API_ENDPOINT = 'https://'.freeze
+    API_ENDPOINT = 'https://api.themoviedb.org/3'.freeze
 
     attr_reader :response
 
