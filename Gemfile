@@ -18,6 +18,7 @@ gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.0.0'
 gem 'bcrypt'
+gem 'jwt'
 gem 'oj'
 gem 'figaro'
 
