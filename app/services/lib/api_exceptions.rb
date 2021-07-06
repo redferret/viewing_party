@@ -5,14 +5,16 @@ module ApiExceptions
 
   attr_reader :response
 
-  GithubAPIError = Class.new(StandardError)
-  BadRequestError = Class.new(GithubAPIError)
-  UnauthorizedError = Class.new(GithubAPIError)
-  ForbiddenError = Class.new(GithubAPIError)
-  ApiRequestsQuotaReachedError = Class.new(GithubAPIError)
-  NotFoundError = Class.new(GithubAPIError)
-  UnprocessableEntityError = Class.new(GithubAPIError)
-  ApiError = Class.new(GithubAPIError)
+  MovieAPIError = Class.new(StandardError)
+  BadRequestError = Class.new(MovieAPIError)
+  UnauthorizedError = Class.new(MovieAPIError)
+  ForbiddenError = Class.new(MovieAPIError)
+  ApiRequestsQuotaReachedError = Class.new(MovieAPIError)
+  NotFoundError = Class.new(MovieAPIError)
+  UnprocessableEntityError = Class.new(MovieAPIError)
+  InvalidParamsError = Class.new(MovieAPIError)
+  ServiceOfflineError = Class.new(MovieAPIError)
+  ApiError = Class.new(MovieAPIError)
 
   def response_successful?
     response.status == HTTP_SUCCESS
@@ -31,6 +33,10 @@ module ApiExceptions
       NotFoundError
     when HTTP_UNPROCESSABLE_ENTITY_CODE
       UnprocessableEntityError
+    when HTTP_INVALID_PARAMS
+      InvalidParamsError
+    when HTTP_SERVICE_OFFLINE
+      ServiceOfflineError
     else
       ApiError
     end
