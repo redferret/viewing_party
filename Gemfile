@@ -17,6 +17,7 @@ gem 'bootsnap'
 gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.0.0'
 gem 'oj'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry'
