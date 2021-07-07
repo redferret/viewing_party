@@ -1,36 +1,42 @@
-require_relative '../lib/api_exceptions'
 require_relative 'api_calls'
 
 module MoviesAPI
   class Client
-    extend ApiExceptions
     extend ApiCalls
 
-    API_ENDPOINT = 'https://api.themoviedb.org/3'.freeze
+    API_ENDPOINT = 'https://api.themoviedb.org/3/'.freeze
 
     attr_reader :response
 
-    def self.client
-      @client ||= Faraday.new(API_ENDPOINT) do |client|
-        client.headers['Authorization'] = "Bearer #{ENV['MOVIES_API_AUTH_TOKEN']}"
-        client.headers['Content-Type'] = 'application/json;charset=utf-8'
+    def self.client(params)
+      params[:api_key] = ENV['API_KEY']
+
+      Faraday.new(
+        url: API_ENDPOINT,
+        params: params
+      ) do |faraday|
+        faraday.response :logger # log requests and responses to $stdout
       end
     end
 
-    def self.request(http_method: :get, endpoint: nil, params: {})
+    def self.get(endpoint = nil, params: {})
       raise 'API endpoint must be defined' if endpoint.nil?
 
-      @response = client.public_send(http_method, endpoint, params)
+      @response = client(params).get(endpoint[1..])
 
       return parse_json if response_successful?
 
-      raise HttpError, "Status: #{response.status}, Response: #{response.body}"
+      raise "Status: #{@response.status}, Response: #{@response.body}"
     end
 
     def self.parse_json
-      Oj.load(response.body)
+      Oj.load(@response.body)
     end
 
-    private_class_method :parse_json, :request
+    def self.response_successful?
+      @response.status == 200
+    end
+
+    private_class_method :parse_json, :get, :response_successful?
   end
 end
