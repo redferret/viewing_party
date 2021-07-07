@@ -9,8 +9,9 @@ module ApiCalls
   end
 
   def search_by_title(title)
-    get SEARCH_BY_TITLE_ENDPOINT, params: {
+    response = get SEARCH_BY_TITLE_ENDPOINT, params: {
       query: title
     }
+    response['results']
   end
 end
