@@ -1,2 +1,40 @@
-<h1>Logged In</h1>
-<%= link_to 'Logout', logout_path, method: :delete, class:'btn btn-secondary btn-sm'%>
+<h1 class="welcome_banner">Welcome <%= @user.email %>!</h1>
+
+<div class="nav_bar_wrapper">
+  <h5>Logged In</h5>
+  <h5 class="nav_bar_links"><%= link_to 'Logout', logout_path, method: :delete, class:'btn btn-secondary btn-sm'%></h5>
+</div>
+
+<div class="discover_link">
+  <%= link_to 'Discover Movies', url: '#', class:'btn btn-secondary btn-sm'%>
+</div>
+
+
+<h2>Friends</h2><hr>
+
+<%= form_with url: dashboard_path, local: true do |f| %>
+  <%= f.label :email, "Find Friend"%>
+  <%= f.text_field :email %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% if !@found_friend.nil? %>
+  <%= @found_friend.email %>
+  <%= link_to 'Add Friend', dashboard_path(add_friend: @found_friend.email), method: :post%>
+<% end %>
+
+<% if @friends.length == 0 %>
+  <p>You currently do not have friends</p>
+<% else %>
+  <% @friends.each do |friend| %>
+    <div class="card">
+      <div class="card-body">
+        <%= friend.email %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+<h2>Viewing Parties</h2><hr>

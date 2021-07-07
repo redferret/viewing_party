@@ -10,4 +10,9 @@ Rails.application.routes.draw do
     resource :login, controller: :sessions, only: :create
     resource :logout, controller: :sessions, only: :destroy
   end
+
+  post '/dashboard', to: 'users/dashboards#show'
+  # get '/users', to: 'users/dashboards#show'
+
+
 end
