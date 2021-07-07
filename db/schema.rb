@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_215426) do
+ActiveRecord::Schema.define(version: 2021_07_07_234120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,5 +32,14 @@ ActiveRecord::Schema.define(version: 2021_07_06_215426) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "viewing_parties", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "movie_title"
+    t.string "movie_poster_path"
+    t.datetime "time_date"
+    t.index ["user_id"], name: "index_viewing_parties_on_user_id"
+  end
+
   add_foreign_key "friendships", "users"
+  add_foreign_key "viewing_parties", "users"
 end
