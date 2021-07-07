@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   scope module: :users do
     resource :dashboard, only: :show
-    resource :discover, controller: :movies, only: :show
-    post '/movies', to: 'movies#show'
+    get '/discover', to: 'movies#index'
+    resources :movies, only: :show
+    post '/movies', to: 'movies#index'
     resource :register, controller: :users, only: [:new, :create]
     resource :login, controller: :sessions, only: :create
     resource :logout, controller: :sessions, only: :destroy
