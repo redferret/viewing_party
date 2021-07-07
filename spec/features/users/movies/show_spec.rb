@@ -12,6 +12,14 @@ RSpec.describe 'Discover movies page' do
     it 'has a field to search for top movies' do
       expect(page).to have_link 'Find Top Rated Movies'
     end
+
+    it 'returns list of top rated movies' do
+      click_link 'Find Top Rated Movies'
+
+      expect(current_path).to eq movies_path
+
+      # Add more to test that the list is showing data
+    end
   end
 
   describe 'searching for movies by title' do
@@ -29,6 +37,8 @@ RSpec.describe 'Discover movies page' do
       end
 
       expect(current_path).to eq movies_path
+
+      # Add more to test that the list is showing data
     end
   end
 end
