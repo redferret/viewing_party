@@ -6,8 +6,8 @@ RSpec.configure do |config|
       'User-Agent'=>'Faraday v1.5.0'
     }
 
-    search_by_title_mock_path = "#{MoviesAPI::Client::API_ENDPOINT}#{MoviesAPI::Client::SEARCH_BY_TITLE_ENDPOINT}?api_key=#{ENV['API_KEY']}&query=Movie%20Title"
-    top_rated_movies_mock_path = "#{MoviesAPI::Client::API_ENDPOINT}#{MoviesAPI::Client::TOP_RATED_MOVIES_ENDPOINT}?api_key=#{ENV['API_KEY']}"
+    search_by_title_mock_path = EndpointStitch::stitch(MoviesAPI::Client::SEARCH_BY_TITLE_ENDPOINT) << '&query=Movie%20Title'
+    top_rated_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::TOP_RATED_MOVIES_ENDPOINT)
 
     stub_request(:get, search_by_title_mock_path).
       with(headers: test_headers).to_return(status: 200, body: "{\"page\":1,\"results\":[{\"poster_path\":\"/cezWGskPY5x7GaglTTRN4Fugfb8.jpg\",\"adult\":false,
