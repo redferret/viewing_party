@@ -14,9 +14,7 @@ module MoviesAPI
       Faraday.new(
         url: API_ENDPOINT,
         params: params
-      ) do |faraday|
-        faraday.response :logger # log requests and responses to $stdout
-      end
+      )
     end
 
     def self.get(endpoint = nil, params: {})
