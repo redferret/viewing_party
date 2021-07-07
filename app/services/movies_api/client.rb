@@ -1,10 +1,10 @@
 require_relative 'api_calls'
+require_relative 'endpoints'
 
 module MoviesAPI
   class Client
+    include Endpoints
     extend ApiCalls
-
-    API_ENDPOINT = 'https://api.themoviedb.org/3/'.freeze
 
     attr_reader :response
 
