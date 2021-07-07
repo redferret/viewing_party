@@ -6,8 +6,6 @@ module MoviesAPI
     include Endpoints
     extend ApiCalls
 
-    attr_reader :response
-
     def self.client(params)
       params[:api_key] = ENV['API_KEY']
 
