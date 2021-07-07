@@ -22,7 +22,7 @@ module MoviesAPI
     def self.get(endpoint = nil, params: {})
       raise 'API endpoint must be defined' if endpoint.nil?
 
-      @response = client(params).get(endpoint[1..])
+      @response = client(params).get(endpoint)
 
       return parse_json if response_successful?
 
