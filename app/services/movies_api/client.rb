@@ -1,5 +1,5 @@
-require_relative 'api_calls'
 require_relative 'endpoints'
+require_relative 'api_calls'
 
 module MoviesAPI
   class Client

@@ -1,5 +1,3 @@
-require_relative 'endpoints'
-
 module ApiCalls
   include Endpoints
 
