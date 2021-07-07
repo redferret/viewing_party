@@ -8,5 +8,8 @@ Rails.application.routes.draw do
     resource :logout, controller: :sessions, only: :destroy
   end
 
-  
+  post '/dashboard', to: 'users/dashboards#show'
+  # get '/users', to: 'users/dashboards#show'
+
+
 end
