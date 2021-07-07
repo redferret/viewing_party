@@ -17,7 +17,6 @@ RSpec.describe 'Discover movies page' do
       click_link 'Find Top Rated Movies'
 
       expect(current_path).to eq movies_path
-
       within '#movies-list' do
         expect(page).to have_link('The Shawshank Redemption')
         expect(page).to have_content('Vote Average: 8.32')
