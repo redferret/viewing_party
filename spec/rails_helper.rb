@@ -50,7 +50,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.include Helpers::Auth, type: :feature
+  config.include Helpers::LoginMock, type: :feature
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
