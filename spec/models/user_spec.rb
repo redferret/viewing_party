@@ -23,10 +23,10 @@ RSpec.describe User do
     expect(Friendship.all.count).to eq(1)
 
     user_1.add_friend(user_3)
-    result = Friendship.all.last
+    result2 = Friendship.all.last
 
-    expect(result.user_id).to eq(user_1.id)
-    expect(result.friend_id).to eq(user_3.id)
+    expect(result2.user_id).to eq(user_1.id)
+    expect(result2.friend_id).to eq(user_3.id)
     expect(Friendship.all.count).to eq(2)
   end
 end
