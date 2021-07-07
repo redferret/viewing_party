@@ -12,9 +12,9 @@ RSpec.describe User do
   end
 
   it 'cand add a friend to a user' do
-    user_1 = User.create!(email: "user1@email.com", password_digest: "1234")
-    user_2 = User.create!(email: "user2@email.com", password_digest: "1234")
-    user_3 = User.create!(email: "user3@email.com", password_digest: "1234")
+    user_1 = FactoryBot.create(:user, email: "user1@email.com")
+    user_2 = FactoryBot.create(:user, email: "user2@email.com")
+    user_3 = FactoryBot.create(:user, email: "user3@email.com")
     user_1.add_friend(user_2)
     result = Friendship.all.first
 

@@ -2,23 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Dashboard page' do
   before(:each) do
-    user_1 = User.create!(email: "user1@email.com", password_digest: "1234")
-    visit '/'
-    click_on("New to Viewing Party? Register Here")
-    within 'form' do
-      fill_in 'user[email]', with: 'test2@test.com'
-      fill_in 'user[password]', with: 'password'
-      click_button 'Register'
-    end
-  end
-
-  it 'before each section creates user and takes you to dashboard' do
-    expect(current_path).to eq("/dashboard")
-    # save_and_open_page
+    @user1 = FactoryBot.create(:user)
+    @user2 = FactoryBot.create(:user, email: "email@email.com")
+    login_with @user1
+    visit '/dashboard'
   end
 
   it 'has a welcome message' do
-    expect(page).to have_content("Welcome test2@test.com!")
+    expect(page).to have_content("Welcome #{@user1.email}")
   end
 
   it 'has sections for freinds and view parties' do
@@ -31,7 +22,7 @@ RSpec.describe 'Dashboard page' do
     expect(page).to_not have_link('Add Friend')
     expect(page).to have_content("You currently do not have friends")
 
-    fill_in'email', with: "user1@email.com"
+    fill_in'email', with: "#{@user2.email}"
     click_on("Search")
 
     expect(page).to have_link('Add Friend')
