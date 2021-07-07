@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Welcome Page' do
   before :each do
-    User.create!(email: 'test@test.com', password: 'password')
+    FactoryBot.create(:user)
     visit '/'
   end
 

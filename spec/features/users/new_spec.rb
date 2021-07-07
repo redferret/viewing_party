@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Register page' do
 
   before :each do
-    User.create!(email: 'test@test.com', password: 'password')
+    FactoryBot.create(:user)
     visit new_register_path
   end
 
