@@ -4,9 +4,7 @@ class Users::DashboardsController < ApplicationController
     @friends = @user.friends.uniq
     if params[:email].present?
       @found_friend = User.find_by(email: params[:email])
-      if !@found_friend
-        flash[:alert] = 'Sorry! Friend was not found.'
-      end
+      flash[:alert] = 'Sorry! Friend was not found.' unless @found_friend
     end
     if params[:add_friend].present?
       friend = User.find_by(email: params[:add_friend])

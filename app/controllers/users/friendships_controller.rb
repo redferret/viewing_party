@@ -1,5 +1,3 @@
 class Users::FriendshipsController < ApplicationController
-  def create
-
-  end
+  def create; end
 end
