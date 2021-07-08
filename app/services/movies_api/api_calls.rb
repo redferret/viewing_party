@@ -12,4 +12,9 @@ module ApiCalls
     }
     response['results']
   end
+
+  def trending_movies
+    response = get TRENDING_MOVIES_ENDPOINT
+    response['results']
+  end
 end
