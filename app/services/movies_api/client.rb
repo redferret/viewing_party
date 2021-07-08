@@ -6,10 +6,6 @@ module MoviesAPI
     include Endpoints
     extend ApiCalls
 
-    def self.response
-      @@response
-    end
-
     def self.client(params)
       params[:api_key] = ENV['API_KEY']
 
@@ -23,22 +19,22 @@ module MoviesAPI
       raise 'API endpoint must be defined' if endpoint.nil?
 
       connection = client(params)
-      
-      @@response = connection.get(endpoint)
+
+      @response = connection.get(endpoint)
 
       return parse_json if response_successful?
 
-      raise "Status: #{response.status}, Response: #{response.body}"
+      raise "Status: #{@response.status}, Response: #{@response.body}"
     end
 
     def self.parse_json
-      Oj.load(response.body)
+      Oj.load(@response.body)
     end
 
     def self.response_successful?
-      response.status == 200
+      @response.status == 200
     end
 
-    private_class_method :parse_json, :response_successful?, :response
+    private_class_method :parse_json, :response_successful?
   end
 end
