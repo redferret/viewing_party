@@ -6,6 +6,8 @@ class Users::DashboardsController < ApplicationController
     @friends = current_user.friends.uniq
     flash[:alert] = 'Sorry! Friend was not found.' if params[:email].present? && !@found_friend
     set_friendships if params[:add_friend].present?
+    @hosted_parties = current_user.movie_parties
+    @user_invitations = Invitation.find_invitations(current_user.id)
   end
 
   private
