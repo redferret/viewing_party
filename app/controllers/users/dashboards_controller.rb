@@ -1,5 +1,5 @@
 class Users::DashboardsController < ApplicationController
-  before_action :set_user
+  before_action :set_user_and_friends
 
   def show
     @friends = current_user.friends
@@ -10,7 +10,6 @@ class Users::DashboardsController < ApplicationController
     @found_friend = User.find_by(email: params[:email])
     if !current_user.friends.include?(@found_friend)
       current_user.add_friend(@found_friend)
-      @friends = current_user.friends
       flash[:success] = 'Friend Added!'
     else
       flash[:notice] = 'Friend Already Added'
@@ -20,8 +19,9 @@ class Users::DashboardsController < ApplicationController
 
   private
 
-  def set_user
+  def set_user_and_friends
     @user = current_user
+    @friends = current_user.friends
   end
 
   def find_a_friend
