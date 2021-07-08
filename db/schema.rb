@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2021_07_07_234120) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "movie_parties", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "movie_title"
+    t.string "movie_poster_path"
+    t.datetime "time_date"
+    t.index ["user_id"], name: "index_movie_parties_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -32,14 +40,6 @@ ActiveRecord::Schema.define(version: 2021_07_07_234120) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "viewing_parties", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "movie_title"
-    t.string "movie_poster_path"
-    t.datetime "time_date"
-    t.index ["user_id"], name: "index_viewing_parties_on_user_id"
-  end
-
   add_foreign_key "friendships", "users"
-  add_foreign_key "viewing_parties", "users"
+  add_foreign_key "movie_parties", "users"
 end
