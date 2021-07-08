@@ -1,0 +1,31 @@
+<div class='row text-center'>
+  <div class='col'>
+    <% if user %>
+      <h1 class="welcome_banner">Welcome <%= user.email %>!</h1>
+    <% else %>
+      <h1>Welcome to Viewing Party</h1>
+    <% end %>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <% if user %>
+          <%= link_to 'Dashboard', dashboard_path, class:'nav-link'%>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <% if user %>
+          <%= link_to 'Discover', discover_path, class:'nav-link'%>
+        <% end %>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      <% if user %>
+        <%= link_to 'Logout', logout_path, method: :delete, class:'nav-link'%>
+      <% end %>
+    </span>
+  </div>
+</nav>
