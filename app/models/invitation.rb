@@ -3,12 +3,9 @@ class Invitation < ApplicationRecord
   belongs_to :friendship
 
   def self.find_invitations(user_id)
+    # binding.pry
     joins(:friendship, :movie_party)
-      .select('invitations.*', 'movie_parties.*', 'friendships.friend_id as friend_user_id')
+      .select('invitations.*', 'movie_parties.movie_poster_path', 'movie_parties.movie_title', 'movie_parties.time_date', 'friendships.friend_id as friend_user_id')
       .where('friendships.friend_id = ?', user_id)
   end
 end
-
-
-# MovieParty.joins(:invitations, :friendships).select('invitations.*', 'movie_parties.*', 'friendships.friend_id as friend_user_id').where('invitaions.friendship_id' == 1)
-# Invitation.joins(:friendship, :movie_party).select('invitations.*', 'movie_parties.*', 'friendships.friend_id as friend_user_id').where('invitaions.friendship_id' == 1)
