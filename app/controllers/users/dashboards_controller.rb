@@ -1,5 +1,5 @@
 class Users::DashboardsController < ApplicationController
-  before_action :set_user_and_friends
+  before_action :set_friends
 
   def show
     find_a_friend if params[:find_friend_by_email].present?
@@ -18,8 +18,7 @@ class Users::DashboardsController < ApplicationController
 
   private
 
-  def set_user_and_friends
-    @user = current_user
+  def set_friends
     @friends = current_user.friends
   end
 
