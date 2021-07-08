@@ -5,7 +5,11 @@ RSpec.describe 'Dashboard page' do
     @user1 = FactoryBot.create(:user)
     @user2 = FactoryBot.create(:user, email: "email@email.com")
     login_with @user1
-    visit '/dashboard'
+    visit dashboard_path
+  end
+
+  it 'has a field to find a friend by an email' do
+    expect(page).to have_field(:find_friend_by_email)
   end
 
   it 'has a welcome message' do
@@ -18,11 +22,10 @@ RSpec.describe 'Dashboard page' do
   end
 
   it 'can search for a friend and add friend' do
-    expect(page).to have_field(:email)
     expect(page).to_not have_link('Add Friend')
     expect(page).to have_content("You currently do not have friends")
 
-    fill_in'email', with: "#{@user2.email}"
+    fill_in 'find_friend_by_email', with: "#{@user2.email}"
     click_on("Search")
 
     expect(page).to have_link('Add Friend')
@@ -34,11 +37,10 @@ RSpec.describe 'Dashboard page' do
   end
 
   it 'can search for a friend without success' do
-    expect(page).to have_field(:email)
     expect(page).to_not have_link('Add Friend')
     expect(page).to have_content("You currently do not have friends")
 
-    fill_in'email', with: "user2@email.com"
+    fill_in 'find_friend_by_email', with: "user2@email.com"
     click_on("Search")
 
     within '#flash-message' do

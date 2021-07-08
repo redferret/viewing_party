@@ -12,18 +12,18 @@
 
 <h2>Friends</h2><hr>
 
-<%= form_with url: dashboard_path, local: true do |f| %>
-  <%= f.label :email, "Find Friend"%>
-  <%= f.text_field :email %>
+<%= form_with url: dashboard_path, local: true, method: :get do |f| %>
+  <%= f.label :find_friend_by_email, "Find Friend"%>
+  <%= f.text_field :find_friend_by_email %>
   <%= f.submit "Search" %>
 <% end %>
 
-<% if !@found_friend.nil? %>
+<% if @found_friend %>
   <%= @found_friend.email %>
-  <%= link_to 'Add Friend', dashboard_path(add_friend: @found_friend.email), method: :post%>
+  <%= link_to 'Add Friend', dashboard_path(email: @found_friend.email), method: :post %>
 <% end %>
 
-<% if @friends.length == 0 %>
+<% if @friends.empty?%>
   <p>You currently do not have friends</p>
 <% else %>
   <% @friends.each do |friend| %>
@@ -34,7 +34,5 @@
     </div>
   <% end %>
 <% end %>
-
-
 
 <h2>Viewing Parties</h2><hr>
