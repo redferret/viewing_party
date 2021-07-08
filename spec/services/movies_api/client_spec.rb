@@ -11,14 +11,11 @@ RSpec.describe MoviesAPI::Client do
 
     describe '::get' do
       it 'returns the data from an API call' do
-        response = MoviesAPI::Client.get MoviesAPI::Client::TOP_RATED_MOVIES_ENDPOINT
+        response = MoviesAPI::Client.get 'test/endpoint'
         results = response['results']
 
         expect(response).to be_a Hash
         expect(results).to be_an Array
-
-        expect(results.first['original_title']).to eq 'The Shawshank Redemption'
-        expect(results.first['vote_average']).to eq 8.32
       end
     end
   end
