@@ -3,6 +3,7 @@ class User < ApplicationRecord
                     uniqueness: true
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+  has_many :viewing_parties
 
   has_secure_password
 
