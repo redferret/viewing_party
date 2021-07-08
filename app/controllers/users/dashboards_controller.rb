@@ -2,7 +2,6 @@ class Users::DashboardsController < ApplicationController
   before_action :set_user_and_friends
 
   def show
-    @friends = current_user.friends
     find_a_friend if params[:find_friend_by_email].present?
   end
 
