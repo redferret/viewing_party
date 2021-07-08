@@ -1,7 +1,6 @@
 <h1 class="welcome_banner">Welcome <%= @user.email %>!</h1>
 
 <div class="nav_bar_wrapper">
-  <h5>Logged In</h5>
   <h5 class="nav_bar_links"><%= link_to 'Logout', logout_path, method: :delete, class:'btn btn-secondary btn-sm'%></h5>
 </div>
 
@@ -10,29 +9,44 @@
 </div>
 
 
-<h2>Friends</h2><hr>
+<div class='row'>
+  <div class='col'>
+    <h2>Friends</h2><hr>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-5' id='search-friend-form'>
+    <%= form_with url: dashboard_path, local: true, method: :get do |f| %>
+      <%= f.label :find_friend_by_email, "Find Friend"%>
+      <%= f.text_field :find_friend_by_email %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+</div>
 
-<%= form_with url: dashboard_path, local: true, method: :get do |f| %>
-  <%= f.label :find_friend_by_email, "Find Friend"%>
-  <%= f.text_field :find_friend_by_email %>
-  <%= f.submit "Search" %>
-<% end %>
+<div class='row'>
+  <div class='col' id='found-user'>
+    <% if @found_friend %>
+      <%= @found_friend.email %>
+      <%= link_to 'Add Friend', dashboard_path(email: @found_friend.email), method: :post %>
+    <% end %>
+  </div>
+</div>
 
-<% if @found_friend %>
-  <%= @found_friend.email %>
-  <%= link_to 'Add Friend', dashboard_path(email: @found_friend.email), method: :post %>
-<% end %>
-
-<% if @friends.empty?%>
-  <p>You currently do not have friends</p>
-<% else %>
-  <% @friends.each do |friend| %>
-    <div class="card">
-      <div class="card-body">
-        <%= friend.email %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
+<div class='row'>
+  <div class='col' id='friends-list'>
+    <% if @friends.empty?%>
+      <p>You currently do not have friends</p>
+    <% else %>
+      <% @friends.each do |friend| %>
+        <div class="card">
+          <div class="card-body">
+            <%= friend.email %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 <h2>Viewing Parties</h2><hr>

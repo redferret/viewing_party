@@ -8,44 +8,61 @@ RSpec.describe 'Dashboard page' do
     visit dashboard_path
   end
 
-  it 'has a field to find a friend by an email' do
-    expect(page).to have_field(:find_friend_by_email)
-  end
-
   it 'has a welcome message' do
-    expect(page).to have_content("Welcome #{@user1.email}")
-  end
-
-  it 'has sections for freinds and view parties' do
-    expect(page).to have_content("Friends")
-    expect(page).to have_content("Viewing Parties")
-  end
-
-  it 'can search for a friend and add friend' do
-    expect(page).to_not have_link('Add Friend')
-    expect(page).to have_content("You currently do not have friends")
-
-    fill_in 'find_friend_by_email', with: "#{@user2.email}"
-    click_on("Search")
-
-    expect(page).to have_link('Add Friend')
-    click_on("Add Friend")
-
-    within '#flash-message' do
-      expect(page).to have_content 'Friend Added!'
+    within '.welcome_banner' do
+      expect(page).to have_content("Welcome #{@user1.email}")
     end
   end
 
-  it 'can search for a friend without success' do
-    expect(page).to_not have_link('Add Friend')
-    expect(page).to have_content("You currently do not have friends")
+  describe 'adding a friend form,' do
+    it 'has a field to find a friend by an email' do
+      expect(page).to have_field(:find_friend_by_email)
+    end
+    
+    it 'has a title' do
+      expect(page).to have_content("Friends")
+    end
 
-    fill_in 'find_friend_by_email', with: "user2@email.com"
-    click_on("Search")
+    it 'lets the user know if there are no friends' do
+      expect(page).to have_content("You currently do not have friends")
+    end
 
-    within '#flash-message' do
-      expect(page).to have_content 'Sorry! Friend was not found.'
+    it 'searched friend can be added to friend list' do
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "#{@user2.email}"
+        click_on("Search")
+      end
+  
+      within '#found-user' do
+        expect(page).to have_link('Add Friend')
+        click_on("Add Friend")
+      end
+  
+      within '#flash-message' do
+        expect(page).to have_content 'Friend Added!'
+      end
+    end
+
+    it 'can search for a friend without success' do
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "user2@email.com"
+        click_on("Search")
+      end
+      
+      within '#found-user' do
+        expect(page).to_not have_link('Add Friend')
+      end
+  
+      within '#flash-message' do
+        expect(page).to have_content 'Sorry! Friend was not found.'
+      end
     end
   end
 
+  describe 'viewing parties section,' do
+    it 'has a title' do
+      expect(page).to have_content("Viewing Parties")
+    end
+    
+  end
 end
