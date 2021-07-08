@@ -3,12 +3,7 @@ class Users::DashboardsController < ApplicationController
 
   def show
     @friends = current_user.friends
-    if params[:find_friend_by_email].present?
-      @found_friend = User.find_by(email: params[:find_friend_by_email])
-      if !@found_friend
-        flash[:notice] = 'Sorry! Friend was not found.'
-      end
-    end
+    find_a_friend if params[:find_friend_by_email].present?
   end
 
   def create
@@ -27,5 +22,10 @@ class Users::DashboardsController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def find_a_friend
+    @found_friend = User.find_by(email: params[:find_friend_by_email])
+    flash[:notice] = 'Sorry! Friend was not found.' unless @found_friend
   end
 end
