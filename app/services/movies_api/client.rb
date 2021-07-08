@@ -1,6 +1,5 @@
 require_relative 'endpoints'
 require_relative 'api_calls'
-require 'faraday'
 
 module MoviesAPI
   class Client
