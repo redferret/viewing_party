@@ -8,14 +8,19 @@ RSpec.configure do |config|
 
     search_by_title_mock_path = EndpointStitch::stitch(MoviesAPI::Client::SEARCH_BY_TITLE_ENDPOINT) << '&query=Movie%20Title'
     top_rated_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::TOP_RATED_MOVIES_ENDPOINT)
+    test_endpoint_path = EndpointStitch::stitch('test/endpoint')
 
     search_movies_mock_data = MoviesAPIMock::get('search_movie_result.json')
     top_movies_mock_data = MoviesAPIMock::get('top_rated_movies.json')
+    test_endpoint_data = MoviesAPIMock::get('test_endpoint.json')
 
     stub_request(:get, search_by_title_mock_path).
       with(headers: test_headers).to_return(status: 200, body: search_movies_mock_data, headers: {})
 
     stub_request(:get, top_rated_movies_mock_path).
       with(headers: test_headers).to_return(status: 200, body: top_movies_mock_data, headers: {})
+
+    stub_request(:get, test_endpoint_path).
+      with(headers: test_headers).to_return(status: 200, body: test_endpoint_data, headers: {})
   end
 end

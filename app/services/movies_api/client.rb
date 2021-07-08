@@ -18,7 +18,9 @@ module MoviesAPI
     def self.get(endpoint = nil, params: {})
       raise 'API endpoint must be defined' if endpoint.nil?
 
-      @response = client(params).get(endpoint)
+      connection = client(params)
+
+      @response = connection.get(endpoint)
 
       return parse_json if response_successful?
 
@@ -33,6 +35,6 @@ module MoviesAPI
       @response.status == 200
     end
 
-    private_class_method :parse_json, :get, :response_successful?
+    private_class_method :parse_json, :response_successful?
   end
 end
