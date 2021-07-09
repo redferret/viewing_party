@@ -1,6 +1,9 @@
 <div class='row justify-content-md-center'>
-  <div class='col-sm-5 text-center pt-5'>
-    <%= link_to 'Find Top Rated Movies', movies_path(search_by_rating: true), method: :post, class:'badge badge-pill badge-primary' %>
+  <div class='col-sm-3 text-center pt-5'>
+  <h5>
+    <%= link_to 'Find Top Rated Movies', movies_path(search_by_rating: true), method: :post, class:'badge badge-pill badge-primary btn-block' %>
+    <%= link_to 'Find Trending Movies', movies_path(search_trending: true), method: :post, class:'badge badge-pill badge-primary btn-block' %>
+  </h5>
   </div>
 </div>
 
