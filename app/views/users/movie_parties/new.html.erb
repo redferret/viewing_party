@@ -1,0 +1,40 @@
+<div class='row justify-content-md-center'>
+  <div class='col-sm-8 text-center'>
+    <div class='card'>
+      <div class='card-body'>
+        <h5 class='card-title'>Movie Party Details</h5>
+        <%= form_with url: movie_party_path, local: true do |f| %>
+          <div class='form-group row'>
+            <%= f.label :movie_title, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= f.text_field :movie_title, readonly: true, class:'form-control-plaintext'%>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <%= f.label :duration_of_party, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= f.text_field :duration_of_party, class:'form-control' %>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <%= f.label :date_of_party, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= date_select 'date_of_party', 'written_on' %>
+            </div>
+          </div>
+          <h5>Include</h5>
+          <% if @friends %>
+            <% @friends.each do |friend| %>
+              <div class='form-group row'>
+                <%= f.label friend.email, class:'col-sm-8 col-form-label' %>
+                <div class='col-sm-2'>
+                  <%= f.check_box friend.email %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
