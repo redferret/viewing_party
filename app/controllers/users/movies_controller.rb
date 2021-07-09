@@ -10,5 +10,8 @@ class Users::MoviesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @movie = MoviesAPI::Client.movie_details(params[:id])
+    # binding.pry
+  end
 end
