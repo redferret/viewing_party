@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/', to: 'welcome#index'
+  get '/', to: 'welcome#index', as: 'root'
 
   scope module: :users do
     resource :dashboard, only: [:show, :create]
