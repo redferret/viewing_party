@@ -33,9 +33,8 @@ RSpec.describe 'API Calls' do
     end
 
     describe '::movie_credits' do
-      it 'returns credits of a specific movie' do
+      it 'returns credits for a specific movie' do
         movie = MoviesAPI::Client.movie_credits(0)
-        # binding.pry
 
         expect(movie).to be_a Hash
         expect(movie["cast"][0]['name']).to eq("Edward Norton")
@@ -46,9 +45,8 @@ RSpec.describe 'API Calls' do
     end
 
     describe '::movie_reviews' do
-      it 'returns credits of a specific movie' do
+      it 'returns reviews for a specific movie' do
         movie = MoviesAPI::Client.movie_reviews(0)
-        # binding.pry
 
         expect(movie).to be_a Hash
         expect(movie["results"][0]['author']).to eq("Cat Ellington")
