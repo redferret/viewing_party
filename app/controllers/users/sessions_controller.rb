@@ -15,7 +15,6 @@ class Users::SessionsController < ApplicationController
   end
 
   def destroy
-    @user = current_user
     log_out
     redirect_to '/'
   end
