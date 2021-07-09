@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating a movie party page' do
+  before :each do
+    @main_user = FactoryBot.create(:user)
+    @friend_1 = FactoryBot.create(:user, email: 'friend1@test.com')
+    @friend_2 = FactoryBot.create(:user, email: 'friend2@test.com')
+    @friend_3 = FactoryBot.create(:user, email: 'friend3@test.com')
+
+    @main_user.friends << @friend_1 << @friend_2 << @friend_3
+
+    login_with @main_user
+  end
+
   describe 'movie details form' do
     it 'has a title'
     it 'has the movie title'
