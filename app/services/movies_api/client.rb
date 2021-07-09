@@ -3,14 +3,14 @@ require_relative 'api_calls'
 
 module MoviesAPI
   class Client
-    include Endpoints
+    extend Endpoints
     extend ApiCalls
 
     def self.client(params)
       params[:api_key] = ENV['API_KEY']
 
       Faraday.new(
-        url: API_ENDPOINT,
+        url: api_endpoint,
         params: params
       )
     end
