@@ -1,7 +1,7 @@
 <div class='row justify-content-md-center'>
   <div class='col-sm-8 text-center'>
     <div class='card'>
-      <div class='card-body'>
+      <div class='card-body' id='movie-details'>
         <h5 class='card-title'>Movie Party Details</h5>
         <%= form_with url: movie_party_path, local: true do |f| %>
           <div class='form-group row'>
@@ -29,16 +29,18 @@
             </div>
           </div>
           <h5>Include</h5>
-          <% if @friends %>
-            <% @friends.each do |friend| %>
-              <div class='form-group row'>
-                <%= f.label friend.email, class:'col-sm-8 col-form-label' %>
-                <div class='col-sm-2'>
-                  <%= f.check_box friend.email %>
+          <div id='friends-list'>
+            <% if @friends %>
+              <% @friends.each do |friend| %>
+                <div class='form-group row'>
+                  <%= f.label friend.email, class:'col-sm-8 col-form-label' %>
+                  <div class='col-sm-2'>
+                    <%= f.check_box friend.email %>
+                  </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
           <%= f.submit 'Create Party', class:'btn btn-primary'%>
         <% end %>
       </div>
