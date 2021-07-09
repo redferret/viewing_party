@@ -14,4 +14,8 @@ module Endpoints
   def trending_movies_endpoint
     'trending/movie/week'.freeze
   end
+
+  def movie_details_endpoint(movie_id)
+    "movie/#{movie_id}".freeze
+  end
 end

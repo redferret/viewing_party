@@ -19,4 +19,8 @@ module ApiCalls
     response = get trending_movies_endpoint
     response['results']
   end
+
+  def movie_details(movie_id)
+    response = get movie_details_endpoint(movie_id)
+  end
 end
