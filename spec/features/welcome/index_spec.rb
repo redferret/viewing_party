@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Welcome Page' do
   before :each do
     FactoryBot.create(:user)
-    visit '/'
+    visit root_path
   end
 
   describe 'link,' do
