@@ -9,7 +9,7 @@ RSpec.describe 'Discover movies page' do
   end
 
   describe 'searching for top rated movies' do
-    it 'has a field to search for top movies' do
+    it 'has a link to search for top movies' do
       expect(page).to have_link 'Find Top Rated Movies'
     end
 
@@ -22,6 +22,26 @@ RSpec.describe 'Discover movies page' do
         expect(page).to have_content('Vote Average: 8.32')
         expect(page).to have_link('Whiplash')
         expect(page).to have_content('Vote Average: 8.29')
+      end
+    end
+  end
+  
+  describe 'search trending movies,' do
+    it 'has a link to find trending movies' do
+      expect(page).to have_link 'Find Trending Movies'
+    end
+    
+    it 'returns list of trending movies' do
+      click_link 'Find Trending Movies'
+    
+      expect(current_path).to eq movies_path
+
+      within '#movies-list' do
+        expect(page).to have_link('Avengers: Infinity War')
+        expect(page).to have_content('Vote Average: 8.3')
+
+        expect(page).to have_link('Deadpool 2')
+        expect(page).to have_content('Vote Average: 7.6')
       end
     end
   end
