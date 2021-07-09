@@ -14,14 +14,9 @@
         <%= msg %>
       </div>
     <% end %>
-    
-    <div class='row text-center'>
-      <div class='col'>
-        <h1>Welcome to Viewing Party</h1>
-      </div>
-    </div>
 
     <div class='container'>
+      <%= render partial: 'partials/nav_bar', locals: {user: @user}%>
       <%= yield %>
     </div>
     

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
 
   scope module: :users do
-    resource :dashboard, only: :show
+    resource :dashboard, only: [:show, :create]
     get '/discover', to: 'movies#index'
     resources :movies, only: :show
     post '/movies', to: 'movies#index'
@@ -12,7 +12,4 @@ Rails.application.routes.draw do
   end
 
   post '/dashboard', to: 'users/dashboards#show'
-  # get '/users', to: 'users/dashboards#show'
-
-
 end

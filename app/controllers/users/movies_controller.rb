@@ -7,8 +7,6 @@ class Users::MoviesController < ApplicationController
       @movies = MoviesAPI::Client.trending_movies
     elsif params[:movie_title].present?
       @movies = MoviesAPI::Client.search_by_title(params[:movie_title])
-    else
-      flash[:notice] = 'Discover Movies to Watch!'
     end
   end
 
