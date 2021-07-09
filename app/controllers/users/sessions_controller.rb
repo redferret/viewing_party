@@ -10,13 +10,13 @@ class Users::SessionsController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:alert] = 'Could not log you in!'
-      redirect_to '/'
+      redirect_to root_path
     end
   end
 
   def destroy
     log_out
-    redirect_to '/'
+    redirect_to root_path
   end
 
   private

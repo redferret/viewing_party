@@ -1,22 +1,26 @@
 require_relative 'endpoints'
 
 module ApiCalls
-  include Endpoints
+  extend Endpoints
 
   def top_rated_movies
-    response = get TOP_RATED_MOVIES_ENDPOINT
+    response = get top_rated_movies_endpoint
     response['results']
   end
 
   def search_by_title(title)
-    response = get SEARCH_BY_TITLE_ENDPOINT, params: {
+    response = get search_by_title_endpoint, params: {
       query: title
     }
     response['results']
   end
 
   def trending_movies
-    response = get TRENDING_MOVIES_ENDPOINT
+    response = get trending_movies_endpoint
     response['results']
+  end
+
+  def movie_details(movie_id)
+    response = get movie_details_endpoint(movie_id)
   end
 end
