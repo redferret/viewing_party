@@ -6,25 +6,28 @@ class Users::MoviePartiesController < ApplicationController
   end
 
   def create
-    movie_party = MovieParty.new(movie_party_params)
-    movie_party.time_date = build_date_time
-    current_user.movie_parties << movie_party
+    @movie_party = MovieParty.new(movie_party_params)
+    @movie_party.time_date = build_date_time
+    current_user.movie_parties << @movie_party
 
+    create_invitation
+
+    flash[:success] = 'Movie Party Created!'
+
+    redirect_to dashboard_path
+  end
+
+  private
+
+  def create_invitation
     params[:friends].each do |friend_email|
       friend = User.find_by(email: friend_email)
       if friend
         friendship = current_user.friendships.find_by(friend_id: friend.id)
-        Invitation.create(movie_party_id: movie_party.id, friendship_id: friendship.id)
+        Invitation.create(movie_party_id: @movie_party.id, friendship_id: friendship.id)
       end
     end
-
-    if movie_party
-      flash[:success] = 'Movie Party Created!'
-      redirect_to dashboard_path
-    end
   end
-
-  private
 
   def movie_party_params
     params.permit(:movie_title, :movie_poster_path)
