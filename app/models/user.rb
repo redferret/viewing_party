@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def add_friend(friend)
     friends << friend
   end
+
+  def remove_friend(friend)
+    friends.delete(friend)
+  end
 end
