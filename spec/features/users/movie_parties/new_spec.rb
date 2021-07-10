@@ -23,9 +23,8 @@ RSpec.describe 'Creating a movie party page' do
     it 'has all the fields to make a movie party' do
       within '#movie-details' do
         expect(page).to have_field('movie_title', with: 'Fight Club')
-        expect(page).to have_field('duration_of_party')
-        expect(page).to have_field('duration_of_party')
         expect(page).to have_field('time_of_viewing')
+        expect(page).to have_field('duration_of_party')
         expect(page).to have_button('Create Party')
       end
     end
@@ -39,8 +38,25 @@ RSpec.describe 'Creating a movie party page' do
         expect(page).to have_content(@friend_3.email)
       end
       within "#friend-#{@friend_1.id}" do
-        expect(page).to have_field('', type: 'checkbox')
+        expect(page).to have_field("friends[email_#{@friend_1.id}]", type: 'checkbox')
       end
     end
   end
+
+  describe 'creating a party,' do
+    context 'successful creation' do
+      it 'navigates user back to the dashboard with the movie party visible as a host' do
+        within '#movie-details' do
+          fill_in 'time_of_viewing', with: '2:00'
+          check "friends[email_#{@friend_1.id}]"
+          click_button 'Create Party'
+        end
+
+        expect(current_path).to eq dashboard_path
+
+        # Write expectations for the movie party card on the dashboard
+      end
+    end
+  end
+  
 end
