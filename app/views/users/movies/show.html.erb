@@ -2,6 +2,15 @@
 <h5>Vote Average: <%= @movie['vote_average'] %></h5>
 <h5>Run Time: <%= @movie['runtime'] %></h5>
 <h5>Genre(s): <%= @movie['genres'][0]["name"] %></h5><hr>
-<h5>Summary: <%= @movie['overview'] %></h5>
-<h5>Cast: <%=  %></h5><hr>
-<h5>Reviews: <%=  %></h5>
+<h5>Summary:</h5>
+<%= @movie['overview'] %>
+<h5>Cast:</h5>
+<% @movie_cast["cast"].each do |castmember| %>
+ <%= castmember['name'] %>
+<% end %>
+<hr>
+<h5>Reviews:</h5>
+<% @movie_reviews["results"].each do |review| %>
+  <%= review['author'] %><br/>
+  <%= review['content'] %><br/>
+<% end %>

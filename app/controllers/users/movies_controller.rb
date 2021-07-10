@@ -12,6 +12,8 @@ class Users::MoviesController < ApplicationController
 
   def show
     @movie = MoviesAPI::Client.movie_details(params[:id])
+    @movie_cast = MoviesAPI::Client.movie_credits(params[:id])
+    @movie_reviews = MoviesAPI::Client.movie_reviews(params[:id])
     # binding.pry
   end
 end
