@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+
+      <div class="mr-auto">
+        <h1 class="display-4"><%= @movie['title'] %></h1>
+      </div>
+
+      <div class="ml-auto mt-auto mb-auto">
+        <%= link_to 'Create Viewing Party for Movie', url: '#', method: :get %>
+      </div>
+
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-between">
+  <h5>Vote Average: <%= @movie['vote_average'] %></h5>
+  <h5>Run Time: <%= @movie['runtime'] %></h5>
+  <h5>Genre(s): <%= @movie['genres'][0]["name"] %></h5>
+</div>
+<hr>
+
+<h5>Summary</h5>
+
+<div class="container pb-3">
+  <div class="row">
+    <div class="col">
+      <%= @movie['overview'] %>
+    </div>
+  </div>
+</div>
+
+<h5>Cast</h5>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <% @first_five_castmembers.each do |castmember| %>
+        <%= castmember['name'] %> /
+        <%= castmember['character'] %><br/>
+        <% end %>
+      </div>
+      <div class="col">
+        <% @last_five_castmembers.each do |castmember| %>
+        <%= castmember['name'] %> /
+        <%= castmember['character'] %><br/>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<hr>
+
+<h5><%= @movie_reviews["results"].count %> Reviews</h5>
+<% @movie_reviews["results"].each do |review| %>
+  <div class="card border-info mb-3" style="max-width: 75rem;">
+    <div class="card-header"><%= review['author'] %></div>
+    <div class="card-body">
+      <p class="card-text"><%= review['content'] %></p>
+    </div>
+  </div>
+<% end %>

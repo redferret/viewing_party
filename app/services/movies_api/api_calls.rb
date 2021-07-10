@@ -21,6 +21,14 @@ module ApiCalls
   end
 
   def movie_details(movie_id)
-    response = get movie_details_endpoint(movie_id)
+    get movie_details_endpoint(movie_id)
+  end
+
+  def movie_credits(movie_id)
+    get movie_credits_endpoint(movie_id)
+  end
+
+  def movie_reviews(movie_id)
+    get movie_reviews_endpoint(movie_id)
   end
 end

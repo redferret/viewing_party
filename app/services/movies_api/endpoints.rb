@@ -18,4 +18,12 @@ module Endpoints
   def movie_details_endpoint(movie_id)
     "movie/#{movie_id}".freeze
   end
+
+  def movie_credits_endpoint(movie_id)
+    "movie/#{movie_id}/credits".freeze
+  end
+
+  def movie_reviews_endpoint(movie_id)
+    "movie/#{movie_id}/reviews".freeze
+  end
 end
