@@ -7,17 +7,6 @@ class Users::DashboardsController < ApplicationController
     @user_invitations = Invitation.find_invitations(current_user.id)
   end
 
-  def create
-    @found_friend = User.find_by(email: params[:email])
-    if !current_user.friends.include?(@found_friend)
-      current_user.add_friend(@found_friend)
-      flash[:success] = 'Friend Added!'
-    else
-      flash[:notice] = 'Friend Already Added'
-    end
-    redirect_to dashboard_path
-  end
-
   private
 
   def set_friends
