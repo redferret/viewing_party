@@ -16,9 +16,14 @@
 <div class='row'>
   <div class='col' id='found-user'>
     <% if @found_friend %>
-      <%= @found_friend.email %>
-      <%= link_to 'Add Friend', dashboard_path(email: @found_friend.email), method: :post %>
+      <div class="card">
+        <div class="card-body">
+          <%= @found_friend.email %>
+          <%= link_to 'Add Friend', friendship_path(email: @found_friend.email), method: :post, class:'badge badge-primary' %>
+        </div>
+      </div>
     <% end %>
+    <br/>
   </div>
 </div>
 
@@ -31,6 +36,8 @@
         <div class="card">
           <div class="card-body">
             <%= friend.email %>
+            <%= link_to 'Remove Friend', friendship_path(email: friend.email), method: :delete, class:'badge badge-pill badge-light',
+                data: { confirm: 'Are you sure you wish to remove this friend?' } %>
           </div>
         </div>
       <% end %>
