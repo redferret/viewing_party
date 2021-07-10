@@ -38,30 +38,28 @@
   </div>
 </div>
 
-<h2>Viewing Parties</h2><hr>
-<div class="d-inline-flex p-2 bd-highlight">
-  <% if @hosted_parties.length > 0 %>
+<h2>Movie Parties</h2><hr>
+<div class="d-inline-flex p-2 bd-highlight" id='movie-parties'>
+  <% if !@hosted_parties.empty? %>
     <% @hosted_parties.each do |party| %>
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem;" id='movie-party-<%= party.id%>'>
         <img src="https://cdn.pixabay.com/photo/2019/04/24/21/55/cinema-4153289_1280.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Hosting</h5>
           <p class="card-text text-center"><%= party.movie_title %></p>
-          <p class="card-text text-center"><%= party.movie_poster_path %></p>
           <p class="card-text text-center"><%= party.time_date %></p>
         </div>
       </div>
     <% end %>
   <% end %>
 
-  <% if @user_invitations.length > 0 %>
+  <% if !@user_invitations.empty? %>
     <% @user_invitations.each do |party| %>
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem;" id='movie-party-<%= party.id%>'>
         <img src="https://cdn.pixabay.com/photo/2019/04/24/21/55/cinema-4153289_1280.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Invited</h5>
           <p class="card-text text-center"><%= party.movie_title %></p>
-          <p class="card-text text-center"><%= party.movie_poster_path %></p>
           <p class="card-text text-center"><%= party.time_date %></p>
         </div>
       </div>
