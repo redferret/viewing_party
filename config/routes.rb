@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   scope module: :users do
     get '/discover', to: 'movies#index'
     post '/movies', to: 'movies#index'
-    resource :dashboard, only: [:show, :create]
+    resource :dashboard, only: [:show, :create, :destroy]
+    resource :friendship, only: [:create, :destroy]
     resources :movies, only: :show
     resource :register, controller: :users, only: [:new, :create]
     resource :login, controller: :sessions, only: :create
