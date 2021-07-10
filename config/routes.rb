@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resource :register, controller: :users, only: [:new, :create]
     resource :login, controller: :sessions, only: :create
     resource :logout, controller: :sessions, only: :destroy
+    resource :movie_party, only: [:new, :create]
   end
 
   post '/dashboard', to: 'users/dashboards#show'
