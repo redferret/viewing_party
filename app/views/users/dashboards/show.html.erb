@@ -47,20 +47,22 @@
         <div class="card-body">
           <h5 class="card-title text-center">Hosting</h5>
           <p class="card-text text-center"><%= party.movie_title %></p>
-          <p class="card-text text-center"><%= party.time_date %></p>
+          <p class="card-text text-center"><%= party.viewing_date %></p>
+          <p class="card-text text-center"><%= party.viewing_time %></p>
         </div>
       </div>
     <% end %>
   <% end %>
 
   <% if !@user_invitations.empty? %>
-    <% @user_invitations.each do |party| %>
-      <div class="card" style="width: 18rem;" id='movie-party-<%= party.id%>'>
+    <% @user_invitations.each do |invitation| %>
+      <div class="card" style="width: 18rem;" id='movie-party-<%= invitation.id%>'>
         <img src="https://cdn.pixabay.com/photo/2019/04/24/21/55/cinema-4153289_1280.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Invited</h5>
-          <p class="card-text text-center"><%= party.movie_title %></p>
-          <p class="card-text text-center"><%= party.time_date %></p>
+          <p class="card-text text-center"><%= invitation.movie_title %></p>
+          <p class="card-text text-center"><%= invitation.movie_party.viewing_date %></p>
+          <p class="card-text text-center"><%= invitation.movie_party.viewing_time %></p>
         </div>
       </div>
     <% end %>
