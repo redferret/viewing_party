@@ -20,7 +20,6 @@ RSpec.describe 'Movies Show page' do
       expect(page).to have_content("Summary")
       expect(page).to have_content("Cast")
       expect(page).to have_content("3 Reviews")
-      binding.pry
     end
   end
 end

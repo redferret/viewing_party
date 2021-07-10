@@ -22,13 +22,13 @@
 <div class="container">
     <div class="row">
       <div class="col">
-        <% @first_5.each do |castmember| %>
+        <% @first_five_castmembers.each do |castmember| %>
         <%= castmember['name'] %> /
         <%= castmember['character'] %><br/>
         <% end %>
       </div>
       <div class="col">
-        <% @last_5.each do |castmember| %>
+        <% @last_five_castmembers.each do |castmember| %>
         <%= castmember['name'] %> /
         <%= castmember['character'] %><br/>
         <% end %>

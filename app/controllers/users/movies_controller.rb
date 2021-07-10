@@ -13,9 +13,9 @@ class Users::MoviesController < ApplicationController
   def show
     @movie = MoviesAPI::Client.movie_details(params[:id])
     @movie_cast = MoviesAPI::Client.movie_credits(params[:id])
-    @first_10_castmembers = @movie_cast["cast"].first(10)
-    @first_5 = @first_10_castmembers.first(5)
-    @last_5 = @first_10_castmembers.last(5)
+    @first_10_castmembers = @movie_cast['cast'].first(10)
+    @first_five_castmembers = @first_10_castmembers.first(5)
+    @last_five_castmembers = @first_10_castmembers.last(5)
     @movie_reviews = MoviesAPI::Client.movie_reviews(params[:id])
   end
 end
