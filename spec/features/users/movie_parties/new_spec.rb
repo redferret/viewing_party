@@ -16,7 +16,6 @@ RSpec.describe 'Creating a movie party page' do
 
   describe 'movie details form' do
     it 'has a title' do
-      save_and_open_page
       expect(page).to have_content('Movie Party Details')
     end
 
@@ -54,7 +53,13 @@ RSpec.describe 'Creating a movie party page' do
 
         expect(current_path).to eq dashboard_path
 
-        # Write expectations for the movie party card on the dashboard
+        movie_party = MovieParty.first
+
+        within "#movie-party-#{movie_party.id}" do
+          expect(page).to have_content('Hosting')
+          expect(page).to have_content(movie_party.movie_title)
+          expect(page).to have_content(movie_party.time_date)
+        end
       end
     end
   end
