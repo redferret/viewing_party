@@ -58,10 +58,10 @@ RSpec.describe 'Creating a movie party page' do
         within "#movie-party-#{movie_party.id}" do
           expect(page).to have_content('Hosting')
           expect(page).to have_content(movie_party.movie_title)
-          expect(page).to have_content(movie_party.time_date)
+          expect(page).to have_content(movie_party.viewing_date)
+          expect(page).to have_content(movie_party.viewing_time)
         end
       end
     end
   end
-  
 end
