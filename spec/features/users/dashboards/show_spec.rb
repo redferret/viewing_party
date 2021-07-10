@@ -92,7 +92,7 @@ RSpec.describe 'Dashboard page' do
     end
 
     it 'has a title' do
-      expect(page).to have_content("Viewing Parties")
+      expect(page).to have_content("Movie Parties")
     end
 
     it 'lists user parties for user 1' do
