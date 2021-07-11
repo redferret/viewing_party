@@ -25,15 +25,15 @@ RSpec.describe 'Discover movies page' do
       end
     end
   end
-  
+
   describe 'search trending movies,' do
     it 'has a link to find trending movies' do
       expect(page).to have_link 'Find Trending Movies'
     end
-    
+
     it 'returns list of trending movies' do
       click_link 'Find Trending Movies'
-    
+
       expect(current_path).to eq movies_path
 
       within '#movies-list' do
@@ -44,8 +44,28 @@ RSpec.describe 'Discover movies page' do
         expect(page).to have_content('Vote Average: 7.6')
       end
     end
+
+    describe 'search upcoming movies,' do
+      it 'has a link to find upcoming movies' do
+        expect(page).to have_link 'Find Upcoming Movies'
+      end
+
+      it 'returns list of trending movies' do
+        click_link 'Find Upcoming Movies'
+
+        expect(current_path).to eq movies_path
+
+        within '#movies-list' do
+          expect(page).to have_link("The Light Between Oceans")
+          expect(page).to have_content('Vote Average: 4.41')
+
+          expect(page).to have_link("Keanu")
+          expect(page).to have_content('Vote Average: 6.04')
+        end
+      end
+    end
   end
-  
+
   describe 'searching for movies by title' do
     it 'has a button to find movies by search query' do
       within 'form' do
@@ -53,15 +73,15 @@ RSpec.describe 'Discover movies page' do
         expect(page).to have_button 'Find Movies'
       end
     end
-    
+
     it 'returns list of movies from an API call' do
       within 'form' do
         fill_in 'movie_title', with: 'Movie Title'
         click_button 'Find Movies'
       end
-      
+
       expect(current_path).to eq movies_path
-      
+
       within '#movies-list' do
         expect(page).to have_link('The Avengers')
         expect(page).to have_content('Vote Average: 7.33')
