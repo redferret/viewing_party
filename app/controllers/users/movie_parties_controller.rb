@@ -11,7 +11,7 @@ class Users::MoviePartiesController < ApplicationController
   end
 
   def create
-    if has_at_least_one_friend
+    if at_least_one_friend
       create_movie_party
       create_invitation
       flash[:success] = 'Movie Party Created!'
@@ -24,7 +24,7 @@ class Users::MoviePartiesController < ApplicationController
 
   private
 
-  def has_at_least_one_friend
+  def at_least_one_friend
     params[:friends].values.any? do |has_email|
       has_email != 'false'
     end
