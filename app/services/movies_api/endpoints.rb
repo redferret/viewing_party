@@ -28,6 +28,6 @@ module Endpoints
   end
 
   def upcoming_movies_endpoint
-    "movie/upcoming".freeze
-  end  
+    'movie/upcoming'.freeze
+  end
 end
