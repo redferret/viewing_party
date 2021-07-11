@@ -26,4 +26,8 @@ module Endpoints
   def movie_reviews_endpoint(movie_id)
     "movie/#{movie_id}/reviews".freeze
   end
+
+  def upcoming_movies_endpoint
+    'movie/upcoming'.freeze
+  end
 end

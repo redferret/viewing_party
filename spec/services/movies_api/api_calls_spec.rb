@@ -53,5 +53,16 @@ RSpec.describe 'API Calls' do
         expect(movie["results"][0]['content']).to be_a String
       end
     end
+
+    describe '::upcoming_movies' do
+      it 'returns upcoming movie details' do
+        movie = MoviesAPI::Client.upcoming_movies
+
+        expect(movie).to be_a Hash
+        expect(movie["results"][0]['poster_path']).to eq("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg")
+        expect(movie["results"][0]['release_date']).to eq("2016-09-02")
+        expect(movie["results"][0]['title']).to eq("The Light Between Oceans")
+      end
+    end
   end
 end
