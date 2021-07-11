@@ -11,7 +11,7 @@ RSpec.describe 'Creating a movie party page' do
 
     login_with @main_user
 
-    visit new_movie_party_path(movie_id: 0)
+    visit new_movie_party_path(movie_id: 550)
   end
 
   describe 'movie details form' do
@@ -60,6 +60,21 @@ RSpec.describe 'Creating a movie party page' do
           expect(page).to have_content(movie_party.movie_title)
           expect(page).to have_content(movie_party.viewing_date)
           expect(page).to have_content(movie_party.viewing_time)
+        end
+      end
+    end
+
+    context 'unsuccessful creation' do
+      it 'navigates user back to the new page if no friends are added' do
+        within '#movie-details' do
+          fill_in 'time_of_viewing', with: '2:00'
+          click_button 'Create Party'
+        end
+
+        expect(current_path).to eq new_movie_party_path
+
+        within '#flash-message' do
+          expect(page).to have_content('Must have at least 1 friend added')
         end
       end
     end
