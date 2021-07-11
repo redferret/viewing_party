@@ -36,21 +36,22 @@ RSpec.describe User do
         expect(user_1.friends.include?(user_2)).to eq false
       end
       
-      it 'removes any invitations after removing a friend who invited you' do
+      it 'removes any invitations after removing a friend you invited to any party' do
         user_1 = FactoryBot.create(:user, email: "user1@email.com")
         user_2 = FactoryBot.create(:user, email: "user2@email.com")
 
         user_2.friends << user_1
-        user_1.friends << user_2
 
-        movie_party = FactoryBot.create(:movie_party, user: user_2)
+        movie_party_1 = FactoryBot.create(:movie_party, user: user_2)
+        movie_party_2 = FactoryBot.create(:movie_party, user: user_2)
 
         friendship = user_2.friendships.find_by(friend_id: user_1.id)
-        Invitation.create(movie_party_id: movie_party.id, friendship_id: friendship.id)
+        Invitation.create(movie_party_id: movie_party_1.id, friendship_id: friendship.id)
+        Invitation.create(movie_party_id: movie_party_2.id, friendship_id: friendship.id)
 
-        user_1.remove_friend(user_2)
+        user_2.remove_friend(user_1)
 
-        expect(user_1.friends.include?(user_2)).to eq false
+        expect(user_2.friends.include?(user_1)).to eq false
 
         invitations = Invitation.find_invitations(user_1.id)
 
