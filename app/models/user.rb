@@ -12,6 +12,8 @@ class User < ApplicationRecord
   end
 
   def remove_friend(friend)
+    friendship = friendships.find_by(friend_id: friend.id)
+    Invitation.where(friendship_id: friendship.id).destroy_all
     friends.delete(friend)
   end
 end
