@@ -13,6 +13,7 @@ RSpec.configure do |config|
     movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(0))
     movie_credits_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_credits_endpoint(0))
     movie_reviews_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_reviews_endpoint(0))
+    upcoming_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::upcoming_movies_endpoint)
 
     search_movies_mock_data = MoviesAPIMock::get('search_movie_result.json')
     top_movies_mock_data = MoviesAPIMock::get('top_rated_movies.json')
@@ -21,6 +22,7 @@ RSpec.configure do |config|
     movie_details_mock_data = MoviesAPIMock::get('movie_details.json')
     movie_credits_mock_data = MoviesAPIMock::get('movie_credits.json')
     movie_reviews_mock_data = MoviesAPIMock::get('movie_reviews.json')
+    upcoming_movies_mock_data = MoviesAPIMock::get('upcoming_movies.json')
 
     stub_request(:get, search_by_title_mock_path).
       with(headers: test_headers).to_return(status: 200, body: search_movies_mock_data, headers: {})
@@ -42,5 +44,8 @@ RSpec.configure do |config|
 
     stub_request(:get, movie_reviews_mock_path).
       with(headers: test_headers).to_return(status: 200, body: movie_reviews_mock_data, headers: {})
+
+    stub_request(:get, upcoming_movies_mock_path).
+      with(headers: test_headers).to_return(status: 200, body: upcoming_movies_mock_data, headers: {})
   end
 end

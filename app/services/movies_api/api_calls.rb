@@ -31,4 +31,8 @@ module ApiCalls
   def movie_reviews(movie_id)
     get movie_reviews_endpoint(movie_id)
   end
+
+  def upcoming_movies
+    get upcoming_movies_endpoint
+  end
 end
