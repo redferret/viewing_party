@@ -33,7 +33,6 @@ module ApiCalls
   end
 
   def upcoming_movies
-    response = get upcoming_movies_endpoint
-    # response['results']
+    get upcoming_movies_endpoint
   end
 end
