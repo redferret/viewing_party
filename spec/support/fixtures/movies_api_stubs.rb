@@ -10,9 +10,9 @@ RSpec.configure do |config|
     top_rated_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::top_rated_movies_endpoint)
     test_endpoint_path = EndpointStitch::stitch('test/endpoint')
     trending_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::trending_movies_endpoint)
-    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(0))
-    movie_credits_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_credits_endpoint(0))
-    movie_reviews_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_reviews_endpoint(0))
+    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550))
+    movie_credits_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_credits_endpoint(550))
+    movie_reviews_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_reviews_endpoint(550))
     upcoming_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::upcoming_movies_endpoint)
 
     search_movies_mock_data = MoviesAPIMock::get('search_movie_result.json')

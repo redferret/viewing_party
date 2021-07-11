@@ -1,23 +1,40 @@
 class Users::MoviePartiesController < ApplicationController
   def new
     @friends = current_user.friends
-    movie_id = params[:movie_id]
-    @movie = MoviesAPI::Client.movie_details(movie_id)
+    if @friends.empty?
+      flash[:notice] = "You can't create a movie party without friends"
+      redirect_to dashboard_path
+    else
+      movie_id = params[:movie_id]
+      @movie = MoviesAPI::Client.movie_details(movie_id)
+    end
   end
 
   def create
-    @movie_party = MovieParty.new(movie_party_params)
-    @movie_party.time_date = build_date_time
-    current_user.movie_parties << @movie_party
-
-    create_invitation
-
-    flash[:success] = 'Movie Party Created!'
-
-    redirect_to dashboard_path
+    if at_least_one_friend
+      create_movie_party
+      create_invitation
+      flash[:success] = 'Movie Party Created!'
+      redirect_to dashboard_path
+    else
+      flash[:alert] = 'Must have at least 1 friend added'
+      redirect_to new_movie_party_path(movie_id: params[:movie_id])
+    end
   end
 
   private
+
+  def at_least_one_friend
+    params[:friends].values.any? do |has_email|
+      has_email != 'false'
+    end
+  end
+
+  def create_movie_party
+    @movie_party = MovieParty.new(movie_party_params)
+    @movie_party.time_date = build_date_time
+    current_user.movie_parties << @movie_party
+  end
 
   def create_invitation
     params[:friends].each do |friend_email|

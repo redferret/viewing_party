@@ -24,7 +24,7 @@ RSpec.describe 'API Calls' do
 
     describe '::movie_details' do
       it 'returns deatils of a specific movie' do
-        movie = MoviesAPI::Client.movie_details(0)
+        movie = MoviesAPI::Client.movie_details(550)
 
         expect(movie).to be_a Hash
         expect(movie['title']).to eq("Fight Club")
@@ -34,7 +34,7 @@ RSpec.describe 'API Calls' do
 
     describe '::movie_credits' do
       it 'returns credits for a specific movie' do
-        movie = MoviesAPI::Client.movie_credits(0)
+        movie = MoviesAPI::Client.movie_credits(550)
 
         expect(movie).to be_a Hash
         expect(movie["cast"][0]['name']).to eq("Edward Norton")
@@ -46,7 +46,7 @@ RSpec.describe 'API Calls' do
 
     describe '::movie_reviews' do
       it 'returns reviews for a specific movie' do
-        movie = MoviesAPI::Client.movie_reviews(0)
+        movie = MoviesAPI::Client.movie_reviews(550)
 
         expect(movie).to be_a Hash
         expect(movie["results"][0]['author']).to eq("Cat Ellington")
