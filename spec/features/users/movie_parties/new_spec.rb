@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a movie party page' do
   before :each do
+    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550))
+    movie_details_mock_data = MoviesAPIMock::get('movie_details.json')
+    stub_request(:get, movie_details_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})
+
     @main_user = FactoryBot.create(:user)
     @friend_1 = FactoryBot.create(:user, email: 'friend1@test.com')
     @friend_2 = FactoryBot.create(:user, email: 'friend2@test.com')

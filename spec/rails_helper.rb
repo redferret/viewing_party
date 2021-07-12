@@ -51,6 +51,7 @@ RSpec.configure do |config|
   end
 
   config.include Helpers::LoginMock, type: :feature
+  config.include Helpers::APIHelpers
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false

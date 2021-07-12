@@ -2,6 +2,26 @@ require 'rails_helper'
 
 RSpec.describe 'Discover movies page' do
   before :each do
+    trending_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::trending_movies_endpoint)
+    trending_movies_mock_data = MoviesAPIMock::get('trending_movies.json')
+    stub_request(:get, trending_movies_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: trending_movies_mock_data, headers: {})
+      
+    top_rated_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::top_rated_movies_endpoint)
+    top_movies_mock_data = MoviesAPIMock::get('top_rated_movies.json')
+    stub_request(:get, top_rated_movies_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: top_movies_mock_data, headers: {})
+
+    upcoming_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::upcoming_movies_endpoint)
+    upcoming_movies_mock_data = MoviesAPIMock::get('upcoming_movies.json')
+    stub_request(:get, upcoming_movies_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: upcoming_movies_mock_data, headers: {})
+
+    search_by_title_mock_path = EndpointStitch::stitch(MoviesAPI::Client::search_by_title_endpoint) << '&query=Movie%20Title'
+    search_movies_mock_data = MoviesAPIMock::get('search_movie_result.json')
+    stub_request(:get, search_by_title_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: search_movies_mock_data, headers: {})
+
     user = FactoryBot.create(:user)
     login_with(user)
 

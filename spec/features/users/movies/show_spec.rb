@@ -2,6 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'Movies Show page' do
   before :each do
+    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550))
+    movie_details_mock_data = MoviesAPIMock::get('movie_details.json')
+    stub_request(:get, movie_details_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})
+    
+    movie_credits_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_credits_endpoint(550))
+    movie_credits_mock_data = MoviesAPIMock::get('movie_credits.json')
+    stub_request(:get, movie_credits_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: movie_credits_mock_data, headers: {})
+
+    movie_reviews_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_reviews_endpoint(550))
+    movie_reviews_mock_data = MoviesAPIMock::get('movie_reviews.json')
+    stub_request(:get, movie_reviews_mock_path)
+      .with(headers: test_headers).to_return(status: 200, body: movie_reviews_mock_data, headers: {})
+      
     @user = FactoryBot.create(:user)
     login_with(@user)
 
