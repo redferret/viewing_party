@@ -15,9 +15,10 @@
   <h5>Vote Average: <%= @movie[:vote_average] %></h5>
   <h5>Run Time: <%= @movie[:runtime] %></h5>
   <h5>Genre(s): 
-    <%= @movie[:genres].each do |genre| %>
-      <%= genre[:name] %>
+    <% @movie[:genres][0..-2].each do |genre| %>
+      <%= genre[:name] %>,
     <% end %>
+    <%= @movie[:genres].last[:name]%>
   </h5>
 </div>
 <hr>
