@@ -27,7 +27,7 @@ RSpec.describe 'Movies Show page' do
     context 'valid navigation' do
       it 'allows user to create a movie party if they have at least 1 friend' do
         @user.friends << FactoryBot.create(:user, email: 'friend@friends.com')
-        click_link 'Create Viewing Party for Movie'
+        click_link 'Create Movie Party'
 
         expect(current_path).to eq new_movie_party_path
       end
@@ -35,7 +35,7 @@ RSpec.describe 'Movies Show page' do
 
     context 'invalid navigation' do
       it 'navigates back to dashboard if user has no friends yet' do
-        click_link 'Create Viewing Party for Movie'
+        click_link 'Create Movie Party'
         
         expect(current_path).to eq dashboard_path
         within '#flash-message' do
