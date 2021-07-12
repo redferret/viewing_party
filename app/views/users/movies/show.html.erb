@@ -1,6 +1,10 @@
 <div class="container">
+    <div class='row'>
+      <div class='col d-flex justify-content-center'>
+        <%= image_tag "http://image.tmdb.org/t/p/w780/#{@movie[:backdrop_path]}"%>
+      </div>
+    </div>
     <div class="row">
-
       <div class="mr-auto">
         <h1 class="display-4"><%= @movie[:title] %></h1>
       </div>
