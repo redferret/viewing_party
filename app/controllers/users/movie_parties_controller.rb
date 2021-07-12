@@ -13,7 +13,7 @@ class Users::MoviePartiesController < ApplicationController
   def create
     if at_least_one_friend
       create_movie_party
-      create_invitation
+      create_invitations
       flash[:success] = 'Movie Party Created!'
       redirect_to dashboard_path
     else
@@ -36,7 +36,7 @@ class Users::MoviePartiesController < ApplicationController
     current_user.movie_parties << @movie_party
   end
 
-  def create_invitation
+  def create_invitations
     params[:friends].each do |friend_email|
       friend = User.find_by(email: friend_email)
       if friend
