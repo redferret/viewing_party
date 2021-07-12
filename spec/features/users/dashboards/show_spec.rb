@@ -43,6 +43,53 @@ RSpec.describe 'Dashboard page' do
       end
     end
 
+    it 'cant add yourself as a friend' do
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "#{@user1.email}"
+        click_on("Search")
+      end
+
+      within '#found-user' do
+        expect(page).to have_link('Add Friend')
+        click_on("Add Friend")
+      end
+
+      within '#flash-message' do
+        expect(page).to have_content "Can't add yourself as a friend"
+      end
+    end
+
+    it 'cant add the same friend twice' do
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "#{@user2.email}"
+        click_on("Search")
+      end
+
+      within '#found-user' do
+        expect(page).to have_link('Add Friend')
+        click_on("Add Friend")
+      end
+
+      within '#flash-message' do
+        expect(page).to have_content "Friend Added!"
+        # save_and_open_page
+      end
+
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "#{@user2.email}"
+        click_on("Search")
+      end
+
+      within '#found-user' do
+        expect(page).to have_link('Add Friend')
+        click_on("Add Friend")
+      end
+
+      within '#flash-message' do
+        expect(page).to have_content 'Friend Already Added'
+      end
+    end
+
     it 'can search for a friend without success' do
       within '#search-friend-form' do
         fill_in 'find_friend_by_email', with: "user2@email.com"
@@ -56,6 +103,27 @@ RSpec.describe 'Dashboard page' do
       within '#flash-message' do
         expect(page).to have_content 'Sorry! Friend was not found.'
       end
+    end
+
+    it 'a friend can be deleted' do
+      within '#search-friend-form' do
+        fill_in 'find_friend_by_email', with: "#{@user2.email}"
+        click_on("Search")
+      end
+
+      within '#found-user' do
+        expect(page).to have_link('Add Friend')
+        click_on("Add Friend")
+      end
+
+      within '#flash-message' do
+        expect(page).to have_content('Friend Added!')
+      end
+
+      expect(page).to have_link('Remove Friend')
+      click_on("Remove Friend")
+      expect(page).to have_content('Friend Removed')
+      expect(page).to_not have_content("@user2.email")
     end
   end
 
