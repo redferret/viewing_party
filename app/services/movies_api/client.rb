@@ -28,7 +28,7 @@ module MoviesAPI
     end
 
     def self.parse_json
-      Oj.load(@response.body)
+      Oj.load(@response.body, symbol_keys: true)
     end
 
     def self.response_successful?
