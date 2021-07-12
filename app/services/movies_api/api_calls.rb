@@ -5,19 +5,19 @@ module ApiCalls
 
   def top_rated_movies
     response = get top_rated_movies_endpoint
-    response['results']
+    response[:results]
   end
 
   def search_by_title(title)
     response = get search_by_title_endpoint, params: {
       query: title
     }
-    response['results']
+    response[:results]
   end
 
   def trending_movies
     response = get trending_movies_endpoint
-    response['results']
+    response[:results]
   end
 
   def movie_details(movie_id)
@@ -29,10 +29,12 @@ module ApiCalls
   end
 
   def movie_reviews(movie_id)
-    get movie_reviews_endpoint(movie_id)
+    response = get movie_reviews_endpoint(movie_id)
+    response[:results]
   end
 
   def upcoming_movies
-    get upcoming_movies_endpoint
+    response = get upcoming_movies_endpoint
+    response[:results]
   end
 end

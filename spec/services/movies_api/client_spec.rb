@@ -12,7 +12,7 @@ RSpec.describe MoviesAPI::Client do
     describe '::get' do
       it 'returns the data from an API call' do
         response = MoviesAPI::Client.get 'test/endpoint'
-        results = response['results']
+        results = response[:results]
 
         expect(response).to be_a Hash
         expect(results).to be_an Array

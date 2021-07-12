@@ -7,8 +7,8 @@ RSpec.describe 'API Calls' do
         movies = MoviesAPI::Client.top_rated_movies
 
         expect(movies).to be_an Array
-        expect(movies.first['title']).to eq 'The Shawshank Redemption'
-        expect(movies.first['vote_average']).to eq 8.32
+        expect(movies.first[:title]).to eq 'The Shawshank Redemption'
+        expect(movies.first[:vote_average]).to eq 8.32
       end
     end
 
@@ -17,8 +17,8 @@ RSpec.describe 'API Calls' do
         movies = MoviesAPI::Client.search_by_title('Movie Title')
 
         expect(movies).to be_an Array
-        expect(movies.first['title']).to eq 'The Avengers'
-        expect(movies.first['vote_average']).to eq 7.33
+        expect(movies.first[:title]).to eq 'The Avengers'
+        expect(movies.first[:vote_average]).to eq 7.33
       end
     end
 
@@ -27,8 +27,8 @@ RSpec.describe 'API Calls' do
         movie = MoviesAPI::Client.movie_details(550)
 
         expect(movie).to be_a Hash
-        expect(movie['title']).to eq("Fight Club")
-        expect(movie['id']).to eq(550)
+        expect(movie[:title]).to eq("Fight Club")
+        expect(movie[:id]).to eq(550)
       end
     end
 
@@ -37,31 +37,31 @@ RSpec.describe 'API Calls' do
         movie = MoviesAPI::Client.movie_credits(550)
 
         expect(movie).to be_a Hash
-        expect(movie["cast"][0]['name']).to eq("Edward Norton")
-        expect(movie["cast"][0]['character']).to eq("The Narrator")
-        expect(movie["cast"][1]['name']).to eq("Brad Pitt")
-        expect(movie["cast"][1]['character']).to eq("Tyler Durden")
+        expect(movie[:cast].first[:name]).to eq("Edward Norton")
+        expect(movie[:cast].first[:character]).to eq("The Narrator")
+        expect(movie[:cast].second[:name]).to eq("Brad Pitt")
+        expect(movie[:cast].second[:character]).to eq("Tyler Durden")
       end
     end
 
     describe '::movie_reviews' do
       it 'returns reviews for a specific movie' do
-        movie = MoviesAPI::Client.movie_reviews(550)
+        movies = MoviesAPI::Client.movie_reviews(550)
 
-        expect(movie).to be_a Hash
-        expect(movie["results"][0]['author']).to eq("Cat Ellington")
-        expect(movie["results"][0]['content']).to be_a String
+        expect(movies).to be_an Array
+        expect(movies.first[:author]).to eq("Cat Ellington")
+        expect(movies.first[:content]).to be_a String
       end
     end
 
     describe '::upcoming_movies' do
       it 'returns upcoming movie details' do
-        movie = MoviesAPI::Client.upcoming_movies
+        movies = MoviesAPI::Client.upcoming_movies
 
-        expect(movie).to be_a Hash
-        expect(movie["results"][0]['poster_path']).to eq("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg")
-        expect(movie["results"][0]['release_date']).to eq("2016-09-02")
-        expect(movie["results"][0]['title']).to eq("The Light Between Oceans")
+        expect(movies).to be_an Array
+        expect(movies.first[:poster_path]).to eq("/pEFRzXtLmxYNjGd0XqJDHPDFKB2.jpg")
+        expect(movies.first[:release_date]).to eq("2016-09-02")
+        expect(movies.first[:title]).to eq("The Light Between Oceans")
       end
     end
   end
