@@ -4,18 +4,18 @@
       <div class='card-body' id='movie-details'>
         <h5 class='card-title'>Movie Party Details</h5>
         <%= form_with url: movie_party_path, local: true do |f| %>
-          <%= f.hidden_field :movie_id, value: @movie[:id] %>
-          <%= f.hidden_field :movie_poster_path, value: @movie[:backdrop_path] %>
+          <%= f.hidden_field :movie_id, value: @movie.id %>
+          <%= f.hidden_field :movie_poster_path, value: @movie.backdrop_path %>
           <div class='form-group row'>
             <%= f.label :movie_title, class:'col-sm-4 col-form-label' %>
             <div class='col-sm-8'>
-              <%= f.text_field :movie_title, readonly: true, value: @movie[:title], class:'form-control-plaintext'%>
+              <%= f.text_field :movie_title, readonly: true, value: @movie.title, class:'form-control-plaintext'%>
             </div>
           </div>
           <div class='form-group row'>
             <%= f.label :duration_of_party, class:'col-sm-4 col-form-label' %>
             <div class='col-sm-8'>
-              <%= f.text_field :duration_of_party, value: @movie[:runtime], class:'form-control' %>
+              <%= f.text_field :duration_of_party, value: @movie.runtime, class:'form-control' %>
             </div>
           </div>
           <div class='form-group row'>
