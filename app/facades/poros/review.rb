@@ -4,5 +4,5 @@ class Poros::Review
   def initialize(attrs)
     @author = attrs[:author]
     @content = attrs[:content]
-  end  
+  end
 end

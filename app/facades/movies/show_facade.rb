@@ -1,18 +1,30 @@
 class Movies::ShowFacade
   def self.movie_details(id)
-    movie_detail = MoviesAPI::Client.movie_details(id)
-    cast = movie_detail[:credits][:cast].map do |actor_attrs|
+    movie_details = MoviesAPI::Client.movie_details(id)
+    cast = build_cast(movie_details)
+    reviews = build_reviews(movie_details)
+    genres = build_genres(movie_details)
+    Poros::MovieDetails.new(movie_details, cast, reviews, genres)
+  end
+
+  def self.build_cast(movie_details)
+    movie_details[:credits][:cast].map do |actor_attrs|
       Poros::Actor.new(actor_attrs)
     end
-    reviews = movie_detail[:reviews][:results].map do |movie_review|
+  end
+
+  def self.build_reviews(movie_details)
+    movie_details[:reviews][:results].map do |movie_review|
       Poros::Review.new(movie_review)
     end
-    genres = movie_detail[:genres][0..-2].reduce("") do |str, genre|
-      str << genre[:name] << ", "
+  end
+
+  def self.build_genres(movie_details)
+    genres = movie_details[:genres][0..-2].reduce('') do |str, genre|
+      str << genre[:name] << ', '
       str
     end
-    genres << movie_detail[:genres].last[:name]
-
-    Poros::MovieDetails.new(movie_detail, cast, reviews, genres)
+    genres << movie_details[:genres].last[:name]
+    genres
   end
 end

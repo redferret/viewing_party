@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'API Calls' do
-  describe 'MoviesAPI call' do
+RSpec.describe MoviesAPI::Client do
+  describe 'API Call' do
     describe '::trending_movies' do
       it 'returns movies trending for the week' do
         trending_movies_mock_path = EndpointStitch::stitch(MoviesAPI::Client::trending_movies_endpoint)

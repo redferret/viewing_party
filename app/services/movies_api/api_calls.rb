@@ -21,7 +21,7 @@ module ApiCalls
   end
 
   def movie_details(movie_id)
-    get movie_details_endpoint(movie_id), params:{
+    get movie_details_endpoint(movie_id), params: {
       append_to_response: 'credits,reviews'
     }
   end

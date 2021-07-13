@@ -32,5 +32,4 @@ class Poros::MovieDetails
   def last_five_castmembers
     first_10_castmembers.last(5)
   end
-
 end
