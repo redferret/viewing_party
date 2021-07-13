@@ -7,7 +7,6 @@ class Movies::ShowFacade
     reviews = movie_detail[:reviews][:results].map do |movie_review|
       Poros::Review.new(movie_review)
     end
-    # binding.pry
     genres = movie_detail[:genres][0..-2].reduce("") do |str, genre|
       str << genre[:name] << ", "
       str

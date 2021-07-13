@@ -10,11 +10,11 @@ RSpec.describe Poros::Actor do
       expect(@movie).to be_a Poros::Actor
     end
 
-    it 'has a title' do
+    it 'has a name' do
       expect(@movie.name).to eq 'Edward Norton'
     end
 
-    it 'has a vote average' do
+    it 'has a character' do
       expect(@movie.character).to eq 'The Narrator'
     end
   end
