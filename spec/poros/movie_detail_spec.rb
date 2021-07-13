@@ -48,5 +48,9 @@ RSpec.describe Poros::MovieDetails do
       expect(@movie.vote_average).to eq(7.8)
       expect(@movie.runtime).to eq(139)
     end
+
+    it 'lists genres of movie' do
+      expect(@movie.genres[:name]).to eq("Drama") 
+    end
   end
 end
