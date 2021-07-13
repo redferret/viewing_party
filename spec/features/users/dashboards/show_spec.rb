@@ -168,9 +168,7 @@ RSpec.describe 'Dashboard page' do
       visit dashboard_path
 
       expect(page).to have_content(@movie_party.movie_title)
-      expect("Hosting").to appear_before(@movie_party.movie_title)
       expect(page).to have_content(@movie_party2.movie_title)
-      expect("Invited").to appear_before(@movie_party2.movie_title)
       expect(page).to_not have_content(@movie_party3.movie_title)
     end
   end
