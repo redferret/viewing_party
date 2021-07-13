@@ -19,7 +19,7 @@ RSpec.describe Poros::MovieDetails do
                vote_average: 7.8,
                runtime: 139})
 
-      @genres = {"id": 18, "name": "Drama"}
+      @genres = "Drama"
 
       @movie = Poros::MovieDetails.new(@attrs, @cast, @reviews, @genres)
     end
@@ -50,7 +50,7 @@ RSpec.describe Poros::MovieDetails do
     end
 
     it 'lists genres of movie' do
-      expect(@movie.genres[:name]).to eq("Drama") 
+      expect(@movie.genres).to eq("Drama")
     end
   end
 end
