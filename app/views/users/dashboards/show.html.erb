@@ -46,7 +46,7 @@
 </div>
 
 <h2>Movie Parties</h2><hr>
-<div class="d-inline-flex p-2 bd-highlight" id='movie-parties'>
+<div class="d-flex justify-content-center flex-wrap bd-highlight" id='movie-parties'>
   <% if !@hosted_parties.empty? %>
     <% @hosted_parties.each do |party| %>
       <div class="card" style="width: 18rem;" id='movie-party-<%= party.id%>'>
