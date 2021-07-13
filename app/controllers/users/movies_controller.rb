@@ -2,14 +2,13 @@ class Users::MoviesController < ApplicationController
   def index
     @movies = []
     if params[:search_by_rating].present?
-      @movies = MoviesAPI::Client.top_rated_movies
+      @movies = Movies::IndexFacade.top_rated_movies
     elsif params[:search_trending].present?
-      @movies = MoviesAPI::Client.trending_movies
+      @movies = Movies::IndexFacade.trending_movies
     elsif params[:search_upcoming].present?
-      @movies = MoviesAPI::Client.upcoming_movies
-    #   binding.pry
+      @movies = Movies::IndexFacade.upcoming_movies
     elsif params[:movie_title].present?
-      @movies = MoviesAPI::Client.search_by_title(params[:movie_title])
+      @movies = Movies::IndexFacade.search_by_title(params[:movie_title])
     end
   end
 
