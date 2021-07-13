@@ -28,7 +28,7 @@ Allows users to search trending movies, top rated, upcoming, and search by a tit
 Uses PostgresSQL
 
 ## Testing
-Tests with [RSpec]() and uses [Faker](https://github.com/faker-ruby/faker) and [FactoryBot]() for test data creation.
+Tests with [RSpec]() and uses [Faker](https://github.com/faker-ruby/faker) and [FactoryBot](https://github.com/thoughtbot/factory_bot) for test data creation.
 ## To Add changes
 
 - Create PR
