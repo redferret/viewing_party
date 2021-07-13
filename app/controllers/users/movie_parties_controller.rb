@@ -5,13 +5,12 @@ class Users::MoviePartiesController < ApplicationController
       flash[:notice] = "You can't create a movie party without friends"
       redirect_to dashboard_path
     else
-      movie_id = params[:movie_id]
-      @movie = MoviesAPI::Client.movie_details(movie_id)
+      @movie = Movies::ShowFacade.movie_details(params[:movie_id])
     end
   end
 
   def create
-    if at_least_one_friend
+    if at_least_one_friend_invited
       create_movie_party
       create_invitations
       flash[:success] = 'Movie Party Created!'
@@ -24,7 +23,7 @@ class Users::MoviePartiesController < ApplicationController
 
   private
 
-  def at_least_one_friend
+  def at_least_one_friend_invited
     params[:friends].values.any? do |has_email|
       has_email != 'false'
     end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a movie party page' do
   before :each do
-    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550))
+    movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550)) << '&append_to_response=credits,reviews'
     movie_details_mock_data = MoviesAPIMock::get('movie_details.json')
     stub_request(:get, movie_details_mock_path)
       .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})

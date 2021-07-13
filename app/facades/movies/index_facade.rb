@@ -1,5 +1,3 @@
-require_relative '../poros/movie'
-
 class Movies::IndexFacade
   def self.top_rated_movies
     attrs = MoviesAPI::Client.top_rated_movies

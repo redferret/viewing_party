@@ -1,56 +1,51 @@
 <div class="container">
     <div class='row'>
       <div class='col d-flex justify-content-center'>
-        <%= image_tag "http://image.tmdb.org/t/p/w780/#{@movie[:backdrop_path]}"%>
+        <%= image_tag "http://image.tmdb.org/t/p/w780/#{@movie.backdrop_path}"%>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id='title-row'>
       <div class="mr-auto">
-        <h1 class="display-4"><%= @movie[:title] %></h1>
+        <h1 class="display-4"><%= @movie.title %></h1>
       </div>
 
       <div class="ml-auto mt-auto mb-auto">
-        <%= link_to 'Create Movie Party', new_movie_party_path(movie_id: @movie[:id]), class:'btn btn-primary' %>
+        <%= link_to 'Create Movie Party', new_movie_party_path(movie_id: @movie.id), class:'btn btn-primary' %>
       </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-between">
-  <h5>Vote Average: <%= @movie[:vote_average] %></h5>
-  <h5>Run Time: <%= @movie[:runtime] %></h5>
-  <h5>Genre(s): 
-    <% @movie[:genres][0..-2].each do |genre| %>
-      <%= genre[:name] %>,
-    <% end %>
-    <%= @movie[:genres].last[:name]%>
-  </h5>
+<div class="d-flex justify-content-between" id="movie-info">
+  <h5>Vote Average: <%= @movie.vote_average %></h5>
+  <h5>Run Time: <%= @movie.runtime %></h5>
+  <h5>Genre(s): <%= @movie.genres %></h5>
 </div>
 <hr>
 
-<h5>Summary</h5>
 
-<div class="container pb-3">
+<div class="container pb-3" id="summary">
+  <h5>Summary</h5>
   <div class="row">
     <div class="col">
-      <%= @movie[:overview] %>
+      <%= @movie.overview %>
     </div>
   </div>
 </div>
 
-<h5>Cast</h5>
 
-<div class="container">
+<div class="container" id="cast">
+  <h5>Cast</h5>
     <div class="row">
       <div class="col">
-        <% @first_five_castmembers.each do |castmember| %>
-        <%= castmember[:name] %> /
-        <%= castmember[:character] %><br/>
+        <% @movie.first_five_castmembers.each do |castmember| %>
+        <%= castmember.name %> /
+        <%= castmember.character %><br/>
         <% end %>
       </div>
       <div class="col">
-        <% @last_five_castmembers.each do |castmember| %>
-        <%= castmember[:name] %> /
-        <%= castmember[:character] %><br/>
+        <% @movie.last_five_castmembers.each do |castmember| %>
+        <%= castmember.name %> /
+        <%= castmember.character %><br/>
         <% end %>
       </div>
     </div>
@@ -58,12 +53,14 @@
 
 <hr>
 
-<h5><%= @movie_reviews.count %> Reviews</h5>
-<% @movie_reviews.each do |review| %>
-  <div class="card border-info mb-3" style="max-width: 75rem;">
-    <div class="card-header"><%= review[:author] %></div>
-    <div class="card-body">
-      <p class="card-text"><%= review[:content] %></p>
+<div id="reviews">
+  <h5><%= @movie.reviews.count %> Reviews</h5>
+  <% @movie.reviews.each do |review| %>
+    <div class="card border-info mb-3" style="max-width: 75rem;">
+      <div class="card-header"><%= review.author %></div>
+      <div class="card-body">
+        <p class="card-text"><%= review.content %></p>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
