@@ -49,59 +49,27 @@ RSpec.describe 'API Calls' do
 
     describe '::movie_details' do
       it 'returns deatils of a specific movie' do
-        movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550))
+        movie_details_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_details_endpoint(550)) << '&append_to_response=credits,reviews'
         movie_details_mock_data = MoviesAPIMock::get('movie_details.json')
         stub_request(:get, movie_details_mock_path)
           .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})
 
-        movie = MoviesAPI::Client.movie_details(550)
+        movies = MoviesAPI::Client.movie_details(550)
 
-        expect(movie).to be_a Hash
-        expect(movie[:title]).to eq("Fight Club")
-        expect(movie[:id]).to eq(550)
-        expect(movie[:credits]).to be_a Hash
-        expect(movie[:credits][:cast]).to be_a Array
-        expect(movie[:credits][:cast].first[:name]).to eq("Edward Norton")
-        expect(movie[:credits][:cast].first[:character]).to eq("The Narrator")
-        expect(movie[:credits][:cast].second[:name]).to eq("Brad Pitt")
-        expect(movie[:credits][:cast].second[:character]).to eq("Tyler Durden")
-        expect(movies).to be_an Array
-        expect(movies.first[:author]).to eq("Cat Ellington")
-        expect(movies.first[:content]).to be_a String
+        expect(movies).to be_a Hash
+        expect(movies[:title]).to eq("Fight Club")
+        expect(movies[:id]).to eq(550)
+        expect(movies[:credits]).to be_a Hash
+        expect(movies[:credits][:cast]).to be_a Array
+        expect(movies[:credits][:cast].first[:name]).to eq("Edward Norton")
+        expect(movies[:credits][:cast].first[:character]).to eq("The Narrator")
+        expect(movies[:credits][:cast].second[:name]).to eq("Brad Pitt")
+        expect(movies[:credits][:cast].second[:character]).to eq("Tyler Durden")
+        expect(movies[:reviews][:results]).to be_an Array
+        expect(movies[:reviews][:results].first[:author]).to eq("Goddard")
+        expect(movies[:reviews][:results].first[:content]).to be_a String
       end
     end
-
-    # describe '::movie_credits' do
-    #   it 'returns credits for a specific movie' do
-    #     movie_credits_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_credits_endpoint(550))
-    #     movie_credits_mock_data = MoviesAPIMock::get('movie_credits.json')
-    #     stub_request(:get, movie_credits_mock_path)
-    #       .with(headers: test_headers).to_return(status: 200, body: movie_credits_mock_data, headers: {})
-    #
-    #     movie = MoviesAPI::Client.movie_credits(550)
-    #
-    #     expect(movie).to be_a Hash
-    #     expect(movie[:cast].first[:name]).to eq("Edward Norton")
-    #     expect(movie[:cast].first[:character]).to eq("The Narrator")
-    #     expect(movie[:cast].second[:name]).to eq("Brad Pitt")
-    #     expect(movie[:cast].second[:character]).to eq("Tyler Durden")
-    #   end
-    # end
-
-    # describe '::movie_reviews' do
-    #   it 'returns reviews for a specific movie' do
-    #     movie_reviews_mock_path = EndpointStitch::stitch(MoviesAPI::Client::movie_reviews_endpoint(550))
-    #     movie_reviews_mock_data = MoviesAPIMock::get('movie_reviews.json')
-    #     stub_request(:get, movie_reviews_mock_path)
-    #       .with(headers: test_headers).to_return(status: 200, body: movie_reviews_mock_data, headers: {})
-    #
-    #     movies = MoviesAPI::Client.movie_reviews(550)
-    #
-    #     expect(movies).to be_an Array
-    #     expect(movies.first[:author]).to eq("Cat Ellington")
-    #     expect(movies.first[:content]).to be_a String
-    #   end
-    # end
 
     describe '::upcoming_movies' do
       it 'returns upcoming movie details' do
