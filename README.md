@@ -38,5 +38,5 @@ Tests with [RSpec]() and uses [Faker](https://github.com/faker-ruby/faker) and [
 
 ### Authors
 
-- Richard DeSilvey
-- Regina Casias
+- [Richard DeSilvey](https://github.com/redferret)
+- [Regina Casias](https://github.com/rcasias)
