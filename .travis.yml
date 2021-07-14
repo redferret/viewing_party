@@ -11,5 +11,7 @@ deploy:
   api_key: $HEROKU_API_KEY
   app: viewing_party
   run: rails db:migrate
+  on:
+    branch: main
 notifications:
   email: false
