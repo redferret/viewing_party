@@ -10,7 +10,6 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   app: morning-inlet-20349
-  run: rails db:migrate
   on:
     branch: main
 notifications:
