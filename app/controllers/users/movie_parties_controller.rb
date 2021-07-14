@@ -33,6 +33,7 @@ class Users::MoviePartiesController < ApplicationController
     @movie_party = MovieParty.new(movie_party_params)
     @movie_party.time_date = build_date_time
     current_user.movie_parties << @movie_party
+    UserMailer.with(user: current_user, invitee_emails: params[:friends]).party_invitation.deliver_now
   end
 
   def create_invitations
