@@ -2,14 +2,14 @@ class UsersController < ApplicationController
   skip_before_action :authorized?, only: %i[new create]
 
   def new
-    @user = User.new
+    @new_user = User.new
   end
 
   def create
-    @user = User.new(user_params)
+    @new_user = User.new(user_params)
 
-    if @user.save
-      authorize @user
+    if @new_user.save
+      authorize @new_user
       flash[:success] = 'Welcome to our app!'
       redirect_to dashboard_path
     else
