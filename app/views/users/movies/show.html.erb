@@ -1,9 +1,4 @@
 <div class="container">
-    <div class='row'>
-      <div class='col d-flex justify-content-center'>
-        <%= image_tag "http://image.tmdb.org/t/p/w780/#{@movie.backdrop_path}"%>
-      </div>
-    </div>
     <div class="row" id='title-row'>
       <div class="mr-auto">
         <h1 class="display-4"><%= @movie.title %></h1>
@@ -22,35 +17,40 @@
 </div>
 <hr>
 
-
-<div class="container pb-3" id="summary">
-  <h5>Summary</h5>
-  <div class="row">
-    <div class="col">
-      <%= @movie.overview %>
+<div class='row'>
+  <div class='col'>
+    <%= image_tag "http://image.tmdb.org/t/p/w500/#{@movie.backdrop_path}"%>
+  </div>
+  <div class='col'>
+    <div class="container pb-3" id="summary">
+      <h5>Summary</h5>
+      <div class="row">
+        <div class="col">
+          <%= @movie.overview %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-<div class="container" id="cast">
-  <h5>Cast</h5>
-    <div class="row">
-      <div class="col">
-        <% @movie.first_five_castmembers.each do |castmember| %>
-        <%= castmember.name %> /
-        <%= castmember.character %><br/>
-        <% end %>
-      </div>
-      <div class="col">
-        <% @movie.last_five_castmembers.each do |castmember| %>
-        <%= castmember.name %> /
-        <%= castmember.character %><br/>
-        <% end %>
-      </div>
+<div class='row'>
+  <div class="container" id="cast">
+      <h5>Cast</h5>
+        <div class="row">
+          <div class="col">
+            <% @movie.first_five_castmembers.each do |castmember| %>
+            <%= castmember.name %> /
+            <%= castmember.character %><br/>
+            <% end %>
+          </div>
+          <div class="col">
+            <% @movie.last_five_castmembers.each do |castmember| %>
+            <%= castmember.name %> /
+            <%= castmember.character %><br/>
+            <% end %>
+          </div>
+        </div>
     </div>
 </div>
-
 <hr>
 
 <div id="reviews">
