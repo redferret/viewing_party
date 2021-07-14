@@ -6,7 +6,7 @@
 <div class='row'>
   <div class='col-sm-5' id='search-friend-form'>
     <%= form_with url: dashboard_path, local: true, method: :get do |f| %>
-      <%= f.label :find_friend_by_email, "Find Friend"%>
+      <%= f.label :find_friend_by_email%>
       <%= f.text_field :find_friend_by_email %>
       <%= f.submit "Search", class:'btn btn-primary btn-sm'%>
     <% end %>
