@@ -15,6 +15,9 @@ class Users::DashboardsController < ApplicationController
 
   def find_a_friend
     @found_friend = User.find_by(email: params[:find_friend_by_email])
-    flash[:notice] = 'Sorry! Friend was not found.' unless @found_friend
+    unless @found_friend
+      flash[:notice] = 'Sorry! Friend was not found.' 
+      redirect_to dashboard_path
+    end
   end
 end
