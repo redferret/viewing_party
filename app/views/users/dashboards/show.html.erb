@@ -8,7 +8,7 @@
     <%= form_with url: dashboard_path, local: true, method: :get do |f| %>
       <%= f.label :find_friend_by_email, "Find Friend"%>
       <%= f.text_field :find_friend_by_email %>
-      <%= f.submit "Search" %>
+      <%= f.submit "Search", class:'btn btn-primary btn-sm'%>
     <% end %>
   </div>
 </div>
@@ -35,6 +35,7 @@
       <% @friends.each do |friend| %>
         <div class="card">
           <div class="card-body">
+            <%= image_tag 'https://static.thenounproject.com/png/160062-200.png', width:'3%', height: '3%' %>
             <%= friend.email %>
             <%= link_to 'Remove Friend', friendship_path(email: friend.email), method: :delete, class:'badge badge-pill badge-light',
                 data: { confirm: 'Are you sure you wish to remove this friend?' } %>
