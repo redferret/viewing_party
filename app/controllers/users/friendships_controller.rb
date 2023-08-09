@@ -1,6 +1,6 @@
 class Users::FriendshipsController < ApplicationController
   def create
-    @found_friend = User.find_by(email: params[:email])
+    @found_friend = UserQuery.user_with_email(email: params[:email])
 
     if @found_friend.id == current_user.id
       flash[:alert] = "Can't add yourself as a friend"
@@ -15,7 +15,7 @@ class Users::FriendshipsController < ApplicationController
   end
 
   def destroy
-    @found_friend = User.find_by(email: params[:email])
+    @found_friend = UserQuery.user_with_email(email: params[:email])
     if current_user.friends.include?(@found_friend)
       current_user.remove_friend(@found_friend)
       flash[:success] = 'Friend Removed'

@@ -37,7 +37,7 @@ class Users::MoviePartiesController < ApplicationController
 
   def create_invitations
     params[:friends].each do |friend_email|
-      friend = User.find_by(email: friend_email)
+      friend = UserQuery.user_with_email(email: friend_email)
       if friend
         friendship = current_user.friendships.find_by(friend_id: friend.id)
         Invitation.create(movie_party_id: @movie_party.id, friendship_id: friendship.id)

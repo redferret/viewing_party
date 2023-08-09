@@ -14,7 +14,7 @@ class Users::DashboardsController < ApplicationController
   end
 
   def find_a_friend
-    @found_friend = User.find_by(email: params[:find_friend_by_email])
+    @found_friend = UserQuery.user_with_email(email: params[:find_friend_by_email])
     return if @found_friend
 
     flash[:notice] = 'Sorry! Friend was not found.'
