@@ -5,7 +5,7 @@ class Users::MoviePartiesController < ApplicationController
       flash[:notice] = "You can't create a movie party without friends"
       redirect_to dashboard_path
     else
-      @movie = Movies::ShowFacade.movie_details(params[:movie_id])
+      @movie = MoviesService.movie_details(params[:movie_id])
     end
   end
 

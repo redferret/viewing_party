@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Poros::MovieDetails do
+RSpec.describe Models::MovieDetails do
   describe 'instance' do
     before :each do
       @review_1 = ({author: 'Test', content: 'This is my review!'})
@@ -21,11 +21,11 @@ RSpec.describe Poros::MovieDetails do
 
       @genres = "Drama"
 
-      @movie = Poros::MovieDetails.new(@attrs, @cast, @reviews, @genres)
+      @movie = Models::MovieDetails.new(@attrs, @cast, @reviews, @genres)
     end
 
     it 'exists' do
-      expect(@movie).to be_a Poros::MovieDetails
+      expect(@movie).to be_a Models::MovieDetails
     end
 
     it 'had a cast' do

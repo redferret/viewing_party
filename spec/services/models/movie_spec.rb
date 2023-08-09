@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Poros::Movie do
+RSpec.describe Models::Movie do
   describe 'instance' do
     before :each do
-      @movie = Poros::Movie.new({id: 0, title: 'Test', vote_average: 2})
+      @movie = Models::Movie.new({id: 0, title: 'Test', vote_average: 2})
     end
 
     it 'exists' do
-      expect(@movie).to be_a Poros::Movie
+      expect(@movie).to be_a Models::Movie
     end
 
     it 'has an id' do

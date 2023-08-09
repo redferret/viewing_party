@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Poros::Actor do
+RSpec.describe Models::Actor do
   describe 'instance' do
     before :each do
-      @movie = Poros::Actor.new({name: 'Edward Norton', character: 'The Narrator'})
+      @movie = Models::Actor.new({name: 'Edward Norton', character: 'The Narrator'})
     end
 
     it 'exists' do
-      expect(@movie).to be_a Poros::Actor
+      expect(@movie).to be_a Models::Actor
     end
 
     it 'has a name' do

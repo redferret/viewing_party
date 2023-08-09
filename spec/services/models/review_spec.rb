@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Poros::Review do
+RSpec.describe Models::Review do
   describe 'instance' do
     before :each do
-      @movie = Poros::Review.new({author: 'Test', content: 'This is my review!'})
+      @movie = Models::Review.new({author: 'Test', content: 'This is my review!'})
     end
 
     it 'exists' do
-      expect(@movie).to be_a Poros::Review
+      expect(@movie).to be_a Models::Review
     end
 
     it 'has an author' do
