@@ -3,7 +3,7 @@ class Users::DashboardsController < ApplicationController
 
   def show
     find_a_friend if params[:find_friend_by_email].present?
-    @hosted_parties = current_user.movie_parties
+    @hosted_parties = current_user.updated_movie_parties
     @user_invitations = Invitation.find_invitations(current_user.id)
   end
 

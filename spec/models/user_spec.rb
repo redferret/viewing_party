@@ -59,4 +59,41 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '.updated_movie_parties' do
+    subject { user.updated_movie_parties }
+
+    let!(:user) { create(:user) }
+
+    context 'when the movie party is in the past' do
+      before do
+        create(:movie_party, user: user, time_date: DateTime.current - 1.day)
+      end
+
+      it 'removes the movie party' do
+        expect(user.movie_parties.count).to eq 1
+        expect(subject).to eq []
+      end
+    end
+
+    context 'when the movie party is in the future' do
+      before do
+        create(:movie_party, user: user, time_date: DateTime.current + 1.day)
+      end
+
+      it 'does not remove the movie party' do
+        expect(subject).to eq user.movie_parties
+      end
+    end
+
+    context 'when the movie party is today' do
+      before do
+        create(:movie_party, user: user, time_date: DateTime.current)
+      end
+
+      it 'does not remove the movie party' do
+        expect(subject).to eq user.movie_parties
+      end
+    end
+  end
 end
