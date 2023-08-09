@@ -22,7 +22,7 @@ RSpec.describe 'Discover movies page' do
     stub_request(:get, search_by_title_mock_path)
       .with(headers: test_headers).to_return(status: 200, body: search_movies_mock_data, headers: {})
 
-    user = FactoryBot.create(:user)
+    user = create(:user)
     login_with(user)
 
     visit discover_path

@@ -8,7 +8,7 @@ RSpec.describe MovieParty do
 
   describe 'model method,' do
     before :each do
-      user = FactoryBot.create(:user)
+      user = create(:user)
       time_date = DateTime.new(2011, 7, 29, 3, 40, 0)
       @movie_party = MovieParty.new(movie_title: 'Test title', movie_poster_path: '/', time_date: time_date)
       user.movie_parties << @movie_party

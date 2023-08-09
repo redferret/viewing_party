@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Dashboard page' do
   before(:each) do
-    @user1 = FactoryBot.create(:user)
-    @user2 = FactoryBot.create(:user, email: "email@email.com")
+    @user1 = create(:user)
+    @user2 = create(:user, email: "email@email.com")
     login_with @user1
     visit dashboard_path
   end
@@ -129,11 +129,11 @@ RSpec.describe 'Dashboard page' do
 
   describe 'viewing parties section,' do
     before(:each) do
-      @user_1 = FactoryBot.create(:user, email: "user1@email.com")
-      @user_2 = FactoryBot.create(:user, email: "user2@email.com")
-      @user_3 = FactoryBot.create(:user, email: "user3@email.com")
-      @user_4 = FactoryBot.create(:user, email: "user4@email.com")
-      @user_5 = FactoryBot.create(:user, email: "user5@email.com")
+      @user_1 = create(:user, email: "user1@email.com")
+      @user_2 = create(:user, email: "user2@email.com")
+      @user_3 = create(:user, email: "user3@email.com")
+      @user_4 = create(:user, email: "user4@email.com")
+      @user_5 = create(:user, email: "user5@email.com")
 
       @friendship_1 = Friendship.create!(user: @user_1, friend: @user_2)
       @friendship_2 = Friendship.create!(user: @user_1, friend: @user_3)
@@ -145,9 +145,9 @@ RSpec.describe 'Dashboard page' do
 
       @friendship_7 = Friendship.create!(user: @user_3, friend: @user_5)
 
-      @movie_party = FactoryBot.create(:movie_party, user: @user_1)
-      @movie_party2 = FactoryBot.create(:movie_party, user: @user_2)
-      @movie_party3 = FactoryBot.create(:movie_party, user: @user_3)
+      @movie_party = create(:movie_party, user: @user_1)
+      @movie_party2 = create(:movie_party, user: @user_2)
+      @movie_party3 = create(:movie_party, user: @user_3)
 
       @invitation_1 = Invitation.create!(movie_party: @movie_party, friendship: @friendship_1)
       @invitation_2 = Invitation.create!(movie_party: @movie_party, friendship: @friendship_2)

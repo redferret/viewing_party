@@ -15,8 +15,8 @@ RSpec.describe User do
   describe 'model method,' do
     context '#add_friend' do
       it 'adds a friend to this user' do
-        user_1 = FactoryBot.create(:user, email: "user1@email.com")
-        user_2 = FactoryBot.create(:user, email: "user2@email.com")
+        user_1 = create(:user, email: "user1@email.com")
+        user_2 = create(:user, email: "user2@email.com")
     
         user_1.add_friend(user_2)
         result = Friendship.first
@@ -27,8 +27,8 @@ RSpec.describe User do
     
     context '#remove_friend' do
       it 'removes a friend from this user' do
-        user_1 = FactoryBot.create(:user, email: "user1@email.com")
-        user_2 = FactoryBot.create(:user, email: "user2@email.com")
+        user_1 = create(:user, email: "user1@email.com")
+        user_2 = create(:user, email: "user2@email.com")
     
         user_1.friends << user_2
         user_1.remove_friend(user_2)
@@ -37,13 +37,13 @@ RSpec.describe User do
       end
       
       it 'removes any invitations after removing a friend you invited to any party' do
-        user_1 = FactoryBot.create(:user, email: "user1@email.com")
-        user_2 = FactoryBot.create(:user, email: "user2@email.com")
+        user_1 = create(:user, email: "user1@email.com")
+        user_2 = create(:user, email: "user2@email.com")
 
         user_2.friends << user_1
 
-        movie_party_1 = FactoryBot.create(:movie_party, user: user_2)
-        movie_party_2 = FactoryBot.create(:movie_party, user: user_2)
+        movie_party_1 = create(:movie_party, user: user_2)
+        movie_party_2 = create(:movie_party, user: user_2)
 
         friendship = user_2.friendships.find_by(friend_id: user_1.id)
         Invitation.create(movie_party_id: movie_party_1.id, friendship_id: friendship.id)

@@ -7,10 +7,10 @@ RSpec.describe 'Creating a movie party page' do
     stub_request(:get, movie_details_mock_path)
       .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})
 
-    @main_user = FactoryBot.create(:user)
-    @friend_1 = FactoryBot.create(:user, email: 'friend1@test.com')
-    @friend_2 = FactoryBot.create(:user, email: 'friend2@test.com')
-    @friend_3 = FactoryBot.create(:user, email: 'friend3@test.com')
+    @main_user = create(:user)
+    @friend_1 = create(:user, email: 'friend1@test.com')
+    @friend_2 = create(:user, email: 'friend2@test.com')
+    @friend_3 = create(:user, email: 'friend3@test.com')
 
     @main_user.friends << @friend_1 << @friend_2 << @friend_3
 

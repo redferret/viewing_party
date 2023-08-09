@@ -7,7 +7,7 @@ RSpec.describe 'Movies Show page' do
     stub_request(:get, movie_details_mock_path)
       .with(headers: test_headers).to_return(status: 200, body: movie_details_mock_data, headers: {})
 
-    @user = FactoryBot.create(:user)
+    @user = create(:user)
     login_with(@user)
 
     visit movie_url(550)
@@ -41,7 +41,7 @@ RSpec.describe 'Movies Show page' do
   describe 'create movie party link,' do
     context 'valid navigation' do
       it 'allows user to create a movie party if they have at least 1 friend' do
-        @user.friends << FactoryBot.create(:user, email: 'friend@friends.com')
+        @user.friends << create(:user, email: 'friend@friends.com')
         click_link 'Create Movie Party'
 
         expect(current_path).to eq new_movie_party_path
