@@ -15,7 +15,7 @@ class User < ApplicationRecord
     movie_parties.each do |movie_party|
       movie_party.destroy if movie_party.time_date < DateTime.now - 1.day
     end
-    movie_parties.reload
+    movie_parties.reload.order(:time_date)
   end
 
   def remove_friend(friend)
