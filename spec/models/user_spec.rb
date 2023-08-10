@@ -12,51 +12,49 @@ RSpec.describe User do
     it { should have_many(:friends).through(:friendships) }
   end
 
-  describe 'model method,' do
-    context '#add_friend' do
-      it 'adds a friend to this user' do
-        user_1 = create(:user, email: "user1@email.com")
-        user_2 = create(:user, email: "user2@email.com")
-    
-        user_1.add_friend(user_2)
-        result = Friendship.first
+  describe '#add_friend' do
+    subject { user.add_friend(friend) }
 
-        expect(user_1.friends.include?(user_2)).to eq true
-      end
+    let!(:user) { create(:user, email: 'user1@email.com') }
+    let!(:friend) { create(:user, email: 'user2@email.com') }
+
+    it 'adds a friend to this user' do
+      subject
+      expect(user.friends).to include friend
+    end
+  end
+  
+  describe '#remove_friend' do
+    it 'removes a friend from this user' do
+      user_1 = create(:user, email: "user1@email.com")
+      user_2 = create(:user, email: "user2@email.com")
+  
+      user_1.friends << user_2
+      user_1.remove_friend(user_2)
+
+      expect(user_1.friends.include?(user_2)).to eq false
     end
     
-    context '#remove_friend' do
-      it 'removes a friend from this user' do
-        user_1 = create(:user, email: "user1@email.com")
-        user_2 = create(:user, email: "user2@email.com")
-    
-        user_1.friends << user_2
-        user_1.remove_friend(user_2)
+    it 'removes any invitations after removing a friend you invited to any party' do
+      user_1 = create(:user, email: "user1@email.com")
+      user_2 = create(:user, email: "user2@email.com")
 
-        expect(user_1.friends.include?(user_2)).to eq false
-      end
-      
-      it 'removes any invitations after removing a friend you invited to any party' do
-        user_1 = create(:user, email: "user1@email.com")
-        user_2 = create(:user, email: "user2@email.com")
+      user_2.friends << user_1
 
-        user_2.friends << user_1
+      movie_party_1 = create(:movie_party, user: user_2)
+      movie_party_2 = create(:movie_party, user: user_2)
 
-        movie_party_1 = create(:movie_party, user: user_2)
-        movie_party_2 = create(:movie_party, user: user_2)
+      friendship = user_2.friendships.find_by(friend_id: user_1.id)
+      Invitation.create(movie_party_id: movie_party_1.id, friendship_id: friendship.id)
+      Invitation.create(movie_party_id: movie_party_2.id, friendship_id: friendship.id)
 
-        friendship = user_2.friendships.find_by(friend_id: user_1.id)
-        Invitation.create(movie_party_id: movie_party_1.id, friendship_id: friendship.id)
-        Invitation.create(movie_party_id: movie_party_2.id, friendship_id: friendship.id)
+      user_2.remove_friend(user_1)
 
-        user_2.remove_friend(user_1)
+      expect(user_2.friends.include?(user_1)).to eq false
 
-        expect(user_2.friends.include?(user_1)).to eq false
+      invitations = Invitation.find_invitations(user_1.id)
 
-        invitations = Invitation.find_invitations(user_1.id)
-
-        expect(invitations.empty?).to eq true
-      end
+      expect(invitations.empty?).to eq true
     end
   end
 
