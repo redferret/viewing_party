@@ -21,6 +21,48 @@ class Users::MoviePartiesController < ApplicationController
     end
   end
 
+  def show
+    @friends = current_user.friends
+    @movie_party = MovieParty.find_by(id: params[:id])
+
+    unless @movie_party
+      flash[:alert] = 'Movie Party not found'
+      return redirect_to dashboard_path
+    end
+
+    @movie = MoviesService.movie_details(@movie_party.movie_id)
+  end
+
+  def update
+    @movie_party = MovieParty.find_by(id: params[:id])
+
+    unless @movie_party
+      flash[:alert] = 'Movie Party not updated!'
+      return redirect_to dashboard_path
+    end
+
+    @movie_party.time_date = build_date_time
+    @movie_party.save
+
+    flash[:success] = 'Movie Party Updated!'
+
+    redirect_to dashboard_path
+  end
+
+  def destroy
+    @movie_party = MovieParty.find_by(id: params[:id])
+
+    unless @movie_party
+      flash[:alert] = 'Movie Party not found!'
+      return redirect_to dashboard_path
+    end
+
+    @movie_party.destroy!
+
+    flash[:success] = 'Movie Party Deleted!'
+    redirect_to dashboard_path
+  end
+
   private
 
   def at_least_one_friend_invited
@@ -38,15 +80,19 @@ class Users::MoviePartiesController < ApplicationController
   def create_invitations
     params[:friends].each do |friend_email|
       friend = UserQuery.user_with_email(email: friend_email)
-      if friend
-        friendship = current_user.friendships.find_by(friend_id: friend.id)
-        Invitation.create(movie_party_id: @movie_party.id, friendship_id: friendship.id)
-      end
+      next unless friend
+
+      friendship = current_user.friendships.find_by(friend_id: friend.id)
+      Invitation.create(movie_party_id: @movie_party.id, friendship_id: friendship.id)
     end
   end
 
   def movie_party_params
-    params.permit(:movie_title, :movie_poster_path)
+    params.permit(:movie_title, :movie_poster_path, :movie_id)
+  end
+
+  def update_movie_party_params
+    params.permit(:date_of_viewing, :time_of_viewing, :runtime)
   end
 
   def build_date_time
