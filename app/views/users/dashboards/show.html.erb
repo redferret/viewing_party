@@ -50,13 +50,16 @@
 <div class="d-flex justify-content-center flex-wrap bd-highlight" id='movie-parties'>
   <% if !@hosted_parties.empty? %>
     <% @hosted_parties.each do |party| %>
-      <div class="card" style="width: 18rem;" id='movie-party-<%= party.id%>'>
+      <div class="card" id='movie-party-<%= party.id%>'>
         <img src="http://image.tmdb.org/t/p/w500/<%= party.movie_poster_path%>" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title text-center">Hosting</h5>
           <p class="card-text text-center"><%= party.movie_title %></p>
           <p class="card-text text-center"><%= party.viewing_date %></p>
           <p class="card-text text-center"><%= party.viewing_time %></p>
+          <%= form_tag(movie_party_path(id: party.id), method: :get, class: 'text-center') do %>
+            <%= submit_tag "Edit Movie Party", class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     <% end %>
@@ -64,13 +67,13 @@
 
   <% if !@user_invitations.empty? %>
     <% @user_invitations.each do |invitation| %>
-      <div class="card" style="width: 18rem;" id='movie-party-<%= invitation.id%>'>
-        <img src="http://image.tmdb.org/t/p/w500/<%= invitation.movie_party.movie_poster_path%>" class="card-img-top">
+      <div class="card" id='movie-party-<%= invitation.id%>'>
+        <img src="http://image.tmdb.org/t/p/w500/<%= invitation.movie_party_movie_poster_path%>" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title text-center">Invited</h5>
           <p class="card-text text-center"><%= invitation.movie_title %></p>
-          <p class="card-text text-center"><%= invitation.movie_party.viewing_date %></p>
-          <p class="card-text text-center"><%= invitation.movie_party.viewing_time %></p>
+          <p class="card-text text-center"><%= invitation.movie_party_viewing_date %></p>
+          <p class="card-text text-center"><%= invitation.movie_party_viewing_time %></p>
         </div>
       </div>
     <% end %>

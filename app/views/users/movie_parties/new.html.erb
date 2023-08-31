@@ -3,7 +3,7 @@
     <div class='card'>
       <div class='card-body' id='movie-details'>
         <h5 class='card-title'>Movie Party Details</h5>
-        <%= form_with url: movie_party_path, local: true do |f| %>
+        <%= form_with url: movie_party_index_path, local: true do |f| %>
           <%= f.hidden_field :movie_id, value: @movie.id %>
           <%= f.hidden_field :movie_poster_path, value: @movie.backdrop_path %>
           <div class='form-group row'>
@@ -39,14 +39,12 @@
               </tr>
             </thead>
             <tbody>
-              <% if @friends %>
-              <% @friends.each do |friend| %>
+              <% @friends&.each do |friend| %>
                 <tr id='friend-<%=friend.id%>'>
                   <td><%= friend.email%></td>
                   <td><%= f.check_box "friends[email_#{friend.id}]", { checked: false }, friend.email, 'false' %></td>
                 </tr>
               <% end %>
-            <% end %>
             </tbody>
           </table>
           <%= f.submit 'Create Party', class:'btn btn-primary'%>

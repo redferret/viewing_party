@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="row" id='title-row'>
+      <div class="mr-auto">
+        <h1 class="display-4"><%= @movie.title %></h1>
+      </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between" id="movie-info">
+  <h5>Vote Average: <%= @movie.vote_average %></h5>
+  <h5>Run Time: <%= @movie.runtime %></h5>
+  <h5>Genre(s): <%= @movie.genres %></h5>
+</div>
+<hr>
+<div class='container'>
+  <div class='col text-center'>
+    <div class='card'>
+      <div class='card-body' id='movie-details'>
+        <h5 class='card-title'>Movie Party Details</h5>
+        <%= form_with url: movie_party_path, method: :patch, local: true do |f| %>
+          <%= f.hidden_field :id, value: @movie.id %>
+          <%= f.hidden_field :movie_poster_path, value: @movie.backdrop_path %>
+          <div class='form-group row'>
+            <%= f.label :movie_title, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= f.text_field :movie_title, readonly: true, value: @movie.title, class:'form-control-plaintext'%>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <%= f.label :runtime, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= f.text_field :runtime, value: @movie.runtime, class:'form-control' %>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <%= f.label :date_of_viewing, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= date_select 'date_of_viewing', 'written_on', default: DateTime.parse(@movie_party.time_date.to_s) %>
+            </div>
+          </div>
+          <div class='form-group row'>
+            <%= f.label :time_of_viewing, class:'col-sm-4 col-form-label' %>
+            <div class='col-sm-8'>
+              <%= f.text_field :time_of_viewing, class:'form-control', value: DateTime.parse(@movie_party.time_date.to_s).strftime('%H:%M') %>
+            </div>
+          </div>
+          <h5>Invited Friends</h5>
+          <table class='table' id='friends-list'>
+            <thead>
+              <tr>
+                <th>Friend's Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @friends&.each do |friend| %>
+                <tr id='friend-<%=friend.id%>'>
+                  <td><%= friend.email%></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= f.submit 'Save Party', class:'btn btn-primary'%>
+        <% end %>
+        <br/>
+        <%= form_with url: movie_party_path, method: :delete, local: true do |f| %>
+          <%= f.hidden_field :id, value: @movie.id %>
+          <%= f.submit 'Delete Party', class:'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class='row pb-3'>
+    <div class='col pr-0'>
+      <%= image_tag "http://image.tmdb.org/t/p/w500/#{@movie.backdrop_path}"%>
+    </div>
+    <div class='col-6 p-0'>
+      <div class="container" id="summary">
+        <h5>Summary</h5>
+        <div class="row">
+          <div class="col">
+            <%= @movie.overview %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class="container" id="cast">
+      <h5>Cast</h5>
+        <div class="row">
+          <div class="col">
+            <% @movie.first_five_castmembers.each do |castmember| %>
+            <%= castmember.name %> /
+            <%= castmember.character %><br/>
+            <% end %>
+          </div>
+          <div class="col">
+            <% @movie.last_five_castmembers.each do |castmember| %>
+            <%= castmember.name %> /
+            <%= castmember.character %><br/>
+            <% end %>
+          </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div id="reviews">
+  <h5><%= @movie.reviews.count %> Reviews</h5>
+  <% @movie.reviews.each do |review| %>
+    <div class="card border-info mb-3" style="max-width: 75rem;">
+      <div class="card-header"><%= review.author %></div>
+      <div class="card-body">
+        <p class="card-text"><%= review.content %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
