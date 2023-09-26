@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Dashboard page' do
+RSpec.describe 'Dashboard page', type: :feature do
   before(:each) do
     @user1 = create(:user)
     @user2 = create(:user, email: "email@email.com")
@@ -135,28 +135,28 @@ RSpec.describe 'Dashboard page' do
       @user_4 = create(:user, email: "user4@email.com")
       @user_5 = create(:user, email: "user5@email.com")
 
-      @friendship_1 = Friendship.create!(user: @user_1, friend: @user_2)
-      @friendship_2 = Friendship.create!(user: @user_1, friend: @user_3)
-      @friendship_3 = Friendship.create!(user: @user_1, friend: @user_5)
+      @friendship_1 = create(:friendship, user: @user_1, friend: @user_2)
+      @friendship_2 = create(:friendship, user: @user_1, friend: @user_3)
+      @friendship_3 = create(:friendship, user: @user_1, friend: @user_5)
 
-      @friendship_4 = Friendship.create!(user: @user_2, friend: @user_1)
-      @friendship_5 = Friendship.create!(user: @user_2, friend: @user_3)
-      @friendship_6 = Friendship.create!(user: @user_2, friend: @user_4)
+      @friendship_4 = create(:friendship, user: @user_2, friend: @user_1)
+      @friendship_5 = create(:friendship, user: @user_2, friend: @user_3)
+      @friendship_6 = create(:friendship, user: @user_2, friend: @user_4)
 
-      @friendship_7 = Friendship.create!(user: @user_3, friend: @user_5)
+      @friendship_7 = create(:friendship, user: @user_3, friend: @user_5)
 
       @movie_party = create(:movie_party, user: @user_1)
       @movie_party2 = create(:movie_party, user: @user_2)
       @movie_party3 = create(:movie_party, user: @user_3)
 
-      @invitation_1 = Invitation.create!(movie_party: @movie_party, friendship: @friendship_1)
-      @invitation_2 = Invitation.create!(movie_party: @movie_party, friendship: @friendship_2)
+      @invitation_1 = create(:invitation, movie_party: @movie_party, friendship: @friendship_1)
+      @invitation_2 = create(:invitation, movie_party: @movie_party, friendship: @friendship_2)
 
-      @invitation_3 = Invitation.create!(movie_party: @movie_party2, friendship: @friendship_4)
-      @invitation_4 = Invitation.create!(movie_party: @movie_party2, friendship: @friendship_5)
-      @invitation_5 = Invitation.create!(movie_party: @movie_party2, friendship: @friendship_6)
+      @invitation_3 = create(:invitation, movie_party: @movie_party2, friendship: @friendship_4)
+      @invitation_4 = create(:invitation, movie_party: @movie_party2, friendship: @friendship_5)
+      @invitation_5 = create(:invitation, movie_party: @movie_party2, friendship: @friendship_6)
 
-      @invitation_6 = Invitation.create!(movie_party: @movie_party3, friendship: @friendship_7)
+      @invitation_6 = create(:invitation, movie_party: @movie_party3, friendship: @friendship_7)
     end
 
     it 'has a title' do
@@ -167,9 +167,11 @@ RSpec.describe 'Dashboard page' do
       login_with @user_1
       visit dashboard_path
 
-      expect(page).to have_content(@movie_party.movie_title)
-      expect(page).to have_content(@movie_party2.movie_title)
-      expect(page).to_not have_content(@movie_party3.movie_title)
+      within '#movie-parties' do
+        expect(page).to have_content(@movie_party.movie_title)
+        expect(page).to have_content(@movie_party2.movie_title)
+        expect(page).to_not have_content(@movie_party3.movie_title)
+      end
     end
   end
 end

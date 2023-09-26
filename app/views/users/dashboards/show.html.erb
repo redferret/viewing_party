@@ -65,17 +65,15 @@
     <% end %>
   <% end %>
 
-  <% if !@user_invitations.empty? %>
-    <% @user_invitations.each do |invitation| %>
-      <div class="card" id='movie-party-<%= invitation.id%>'>
-        <img src="http://image.tmdb.org/t/p/w500/<%= invitation.movie_party_movie_poster_path%>" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title text-center">Invited</h5>
-          <p class="card-text text-center"><%= invitation.movie_title %></p>
-          <p class="card-text text-center"><%= invitation.movie_party_viewing_date %></p>
-          <p class="card-text text-center"><%= invitation.movie_party_viewing_time %></p>
-        </div>
+  <% @user_invitations&.each do |invitation| %>
+    <div class="card" id='movie-party-<%= invitation.id%>'>
+      <img src="http://image.tmdb.org/t/p/w500/<%= invitation.movie_party.movie_poster_path%>" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title text-center">Invited</h5>
+        <p class="card-text text-center"><%= invitation.movie_title %></p>
+        <p class="card-text text-center"><%= invitation.movie_party.viewing_date %></p>
+        <p class="card-text text-center"><%= invitation.movie_party.viewing_time %></p>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
